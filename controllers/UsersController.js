@@ -94,6 +94,25 @@ UsersController.login = async (req, res) => {
     })
 };
 
+//MÉTODO GET PARA SACAR UN ELEMENTO DE LA BBDD BUSCÁNDOLO POR NICKNAME EN LA URL
+UsersController.get = async (req, res) => {
+    //Búsqueda comparando un campo
+
+    try {
+        await User.find({ 
+            _id : req.params.id 
+        })
+        .then(elmnt => {
+            res.send(elmnt)
+        })
+    } catch (error) {
+        res.send("backend getUser error: ", error)
+    }
+
+   
+
+}
+
 //MÉTODO PUT PARA MODIFICAR EL PERFIL DE UN USUARIO POR ID
 UsersController.edit = async (req, res) => {
     //Capturo el id que llega por params
@@ -130,7 +149,7 @@ UsersController.edit = async (req, res) => {
             })
         })
     } catch (error) {
-        res.send(error);
+        res.send("backend edit user error: " ,error);
     }
 }
 
@@ -179,7 +198,7 @@ UsersController.delete = async (req, res) => {
         })
 
     } catch (error) {
-        res.send(error);
+        res.send("backend delete user and his posts error: " ,error);
     };
 };
 
