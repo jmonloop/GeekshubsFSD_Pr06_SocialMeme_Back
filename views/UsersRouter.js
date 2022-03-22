@@ -11,9 +11,13 @@ const isAdmin = require("../middlewares/isAdmin");
 const UsersController = require('../controllers/UsersController');
 
 
-// http://localhost:5000/usuarios/register (usando un POST).
+// http://localhost:5500/usuarios/register (usando un POST).
 // Recibe por body un json con los datos de registro de usuario y los guarda en la BBDD
 router.post('/register', UsersController.register);
+
+//http://localhost:5500/usuarios/login (usando un POST)
+//Recibe por body un json con los datos para hacer login y loguea si el usuario existe en la BBDD(las condiciones se ven en la función controladora)
+router.post('/login', UsersController.login);
 
 
 

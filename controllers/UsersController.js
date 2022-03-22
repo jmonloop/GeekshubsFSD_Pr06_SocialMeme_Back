@@ -13,7 +13,7 @@ const UsersController = {};
 
 
 
-//MÉTODO POST PARA ESCRIBIR EN LA BASE DE DATOS
+//USER REGISTER
 UsersController.register = async (req, res) => {
     
     //Declaramos variables para recoger los datos que llegarán por body en formato json.
@@ -62,6 +62,37 @@ UsersController.register = async (req, res) => {
     })
 };
 
+//Método post para loguearse metiendo los datos por body y generar un token nuevo en caso de login satisfactorio.
+//El usuario debe estar registrado en la BBDD con un email y password válidos
+UsersController.login = async (req, res) => {
+    let email = req.body.email;    // Cogemos el email del body
+    let password = req.body.password; //cogemos el password del body
+    
+   await User.find({                   //Buscamos el email para verificar que ese usuario está registrado en nuestra BBDD
+         email: email   //Si el atributo email coincide con el campo email del body...
+        
+    }).then(elmnt => {  
+       //(callback del método findOne que en este caso es lo que haya encontrado)
+        if(!elmnt){   //..si no existe en nuestra BBDD...
+            res.send("Invalid email or password");    //..muestra mensaje de que el login es inválido
+        }else {   //Si sí que existe..
+            if (bcrypt.compareSync(password, elmnt[0].password)) { //Compara contraseña que le manda el body con la que tiene guardada ese usuario en la BBDD (desencriptándola)
+                let token = jwt.sign({ usuario: elmnt }, authConfig.secret, { //Si son iguales, genera un token
+                    expiresIn: authConfig.expires //que expira en un tiempo determinado según lo que haya en ../config/auth
+                });
+                //Mensaje de confirmación de login satisfactorio
+                let loginOkMessage = `welcome again ${elmnt[0].nickname}`
+                res.json({   // y envía por Postman...
+                    loginOkMessage, //el mensaje
+                    user: elmnt, //el usuario
+                    token: token //y el token generado
+                })
+            } else {
+                res.status(401).json({ msg: "Invalid email or password" }); //si no son iguales, login inválido
+            }
+        };
+    })
+};
 
 
 
