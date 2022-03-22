@@ -94,10 +94,94 @@ UsersController.login = async (req, res) => {
     })
 };
 
+//MÉTODO PUT PARA MODIFICAR EL PERFIL DE UN USUARIO POR ID
+UsersController.edit = async (req, res) => {
+    //Capturo el id que llega por params
+    let id = req.params.id;
+    try {
+        //Función updateOne de mongoose
+        User.updateOne(
+            //Primer argumento: objeto donde se compara la _id del documento con el id que llega por params para saber qué documento vamos a modificar
+            {_id : id},{
+                //Segundo argumento: objeto que lleva como key '$set' para asignar los nuevos valores a cada campo
+                $set: {
+                    //Y como valor un objeto con todos los campos de la tabla y su asignación por body
+                    email: req.body.email,
+                    nickname: req.body.nickname,
+                    rating : req.body.rating,
+                    avatar : req.body.avatar,
 
+                    //Metemos todos los campos susceptibles de ser modificados pero luego en el body solo enviaremos los que necesitemos modificar. Por ejemplo:
+                                        //{
+                                        //    "email":"JaviMOD",
+                                        //    "nickname":"jmonleone",
+                                        //    "rating":32,
+                                        //  "avatar": "URLimagenfotoperfil"
+                                        // }
+                    //Y solo modificaremos nombre, apellido y edad de ese documento
+                }
+            }
+        )//If promise is done, response the edited user
+        .then(elmnt => {
+            User.find({
+                _id : id
+            }).then(user => {
+                res.send(user)
+            })
+        })
+    } catch (error) {
+        res.send(error);
+    }
+}
 
+//MÉTODO DELETE PARA BORRAR UN USUARIO DE LA BBDD POR ID
+UsersController.delete = async (req, res) => {
+    //Busco el usuario en mi BBDD
+    try {
+        User.find({
+            _id : req.params.id
+            //Se resuelve la promesa de mongoose
+        }).then(elmnt => {
+            //Si devuelve un valor que no sea array vacío...
+            if(elmnt.length !== 0) {
+                //..almaceno el valor para mostrarlo después de borrarlo
+                let deletedUser = elmnt
+                //..borro el elemento de la BBDD
+                User.remove({
+                    _id : req.params.id
+                    //Una vez se cumple la promesa de borrarlo...
+                }).then(x => {
+                    //Muestro mensaje con el nombre del usuario que se ha borrado
+                    res.send(deletedUser)
+                })
+                // //Borrar en cascada:
+                // //Busco posts asociados a ese id de usuario
+                // Post.find({
+                //     userId: req.params.id
+                // }).then(elmnt => {
+                //     //Si los encuentro, borro todos los posts con ese id de usuario
+                //     if(elmnt.length !== 0) {
+                //         Posts.deleteMany({
+                //             userId: elmnt[0].userId
+                //             //El then, aunque esté vacío, es obligatorio para que ejecute el método
+                //         }).then(x =>{
 
+                //         })
+                //     }
 
+                // })
+                
+                
+                //Si devuelve null quiere decir que no existen usuarios con esa id
+            } else {
+                res.send('There are no users with that id in the database')
+            }
+        })
+
+    } catch (error) {
+        res.send(error);
+    };
+};
 
 
 
