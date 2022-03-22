@@ -1,5 +1,5 @@
 //Importo el modelo Usuario para poder escribir en la tabla Usuario de la BBDD
-const  User  = require('../models/user.js');
+const User = require('../models/user.js');
 //Importo la clase bcrypt para poder encriptar
 const bcrypt = require('bcrypt');
 //Importo el fichero ../config/auth.js para poder darle los parámetros al encriptado
@@ -15,12 +15,12 @@ const UsersController = {};
 
 //USER REGISTER
 UsersController.register = async (req, res) => {
-    
+
     //Declaramos variables para recoger los datos que llegarán por body en formato json.
     //el nombre de la variable por convención suele ser el mismo que tiene cada atributo (columna) en la tabla User de mongoDB
     let email = req.body.email; //lo que va después de "body" (".name" en este caso) es como se llama cada key que recibe desde body
     //Encriptamos el campo password antes de guardarlo en la BBDD
-    let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds)); 
+    let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
     let nickname = req.body.nickname;
     let rol = req.body.rol;
     let rating = req.body.rating;
@@ -41,22 +41,22 @@ UsersController.register = async (req, res) => {
     //Antes de registrar el usuario comprobamos si ya existe en la BBDD haciendo find con email o nickname
     await User.find({
         $or: [
-            {email: email},
-            {nickname: nickname}
+            { email: email },
+            { nickname: nickname }
         ]
     }).then(resultado => {
-        if(resultado.length == 0) {
+        if (resultado.length == 0) {
             User.create({
                 email: email,
                 password: password,
                 nickname: nickname,
                 rol: rol,
                 rating: rating,
-                avatar: avatar 
+                avatar: avatar
             }).then(elmnt => {
                 res.send(`${elmnt.nickname} you have been registered succesfully`)
             })
-        }else {
+        } else {
             res.send(`This user already exists in the database`)
         }
     })
@@ -67,15 +67,15 @@ UsersController.register = async (req, res) => {
 UsersController.login = async (req, res) => {
     let email = req.body.email;    // Cogemos el email del body
     let password = req.body.password; //cogemos el password del body
-    
-   await User.find({                   //Buscamos el email para verificar que ese usuario está registrado en nuestra BBDD
-         email: email   //Si el atributo email coincide con el campo email del body...
-        
-    }).then(elmnt => {  
-       //(callback del método findOne que en este caso es lo que haya encontrado)
-        if(!elmnt){   //..si no existe en nuestra BBDD...
+
+    await User.find({                   //Buscamos el email para verificar que ese usuario está registrado en nuestra BBDD
+        email: email   //Si el atributo email coincide con el campo email del body...
+
+    }).then(elmnt => {
+        //(callback del método findOne que en este caso es lo que haya encontrado)
+        if (!elmnt) {   //..si no existe en nuestra BBDD...
             res.send("Invalid email or password");    //..muestra mensaje de que el login es inválido
-        }else {   //Si sí que existe..
+        } else {   //Si sí que existe..
             if (bcrypt.compareSync(password, elmnt[0].password)) { //Compara contraseña que le manda el body con la que tiene guardada ese usuario en la BBDD (desencriptándola)
                 let token = jwt.sign({ usuario: elmnt }, authConfig.secret, { //Si son iguales, genera un token
                     expiresIn: authConfig.expires //que expira en un tiempo determinado según lo que haya en ../config/auth
@@ -99,17 +99,17 @@ UsersController.get = async (req, res) => {
     //Búsqueda comparando un campo
 
     try {
-        await User.find({ 
-            _id : req.params.id 
+        await User.find({
+            _id: req.params.id
         })
-        .then(elmnt => {
-            res.send(elmnt)
-        })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
     } catch (error) {
         res.send("backend getUser error: ", error)
     }
 
-   
+
 
 }
 
@@ -121,35 +121,35 @@ UsersController.edit = async (req, res) => {
         //Función updateOne de mongoose
         User.updateOne(
             //Primer argumento: objeto donde se compara la _id del documento con el id que llega por params para saber qué documento vamos a modificar
-            {_id : id},{
-                //Segundo argumento: objeto que lleva como key '$set' para asignar los nuevos valores a cada campo
-                $set: {
-                    //Y como valor un objeto con todos los campos de la tabla y su asignación por body
-                    email: req.body.email,
-                    nickname: req.body.nickname,
-                    rating : req.body.rating,
-                    avatar : req.body.avatar,
+            { _id: id }, {
+            //Segundo argumento: objeto que lleva como key '$set' para asignar los nuevos valores a cada campo
+            $set: {
+                //Y como valor un objeto con todos los campos de la tabla y su asignación por body
+                email: req.body.email,
+                nickname: req.body.nickname,
+                rating: req.body.rating,
+                avatar: req.body.avatar,
 
-                    //Metemos todos los campos susceptibles de ser modificados pero luego en el body solo enviaremos los que necesitemos modificar. Por ejemplo:
-                                        //{
-                                        //    "email":"JaviMOD",
-                                        //    "nickname":"jmonleone",
-                                        //    "rating":32,
-                                        //  "avatar": "URLimagenfotoperfil"
-                                        // }
-                    //Y solo modificaremos nombre, apellido y edad de ese documento
-                }
+                //Metemos todos los campos susceptibles de ser modificados pero luego en el body solo enviaremos los que necesitemos modificar. Por ejemplo:
+                //{
+                //    "email":"JaviMOD",
+                //    "nickname":"jmonleone",
+                //    "rating":32,
+                //  "avatar": "URLimagenfotoperfil"
+                // }
+                //Y solo modificaremos nombre, apellido y edad de ese documento
             }
+        }
         )//If promise is done, response the edited user
-        .then(elmnt => {
-            User.find({
-                _id : id
-            }).then(user => {
-                res.send(user)
+            .then(elmnt => {
+                User.find({
+                    _id: id
+                }).then(user => {
+                    res.send(user)
+                })
             })
-        })
     } catch (error) {
-        res.send("backend edit user error: " ,error);
+        res.send("backend edit user error: ", error);
     }
 }
 
@@ -158,16 +158,16 @@ UsersController.delete = async (req, res) => {
     //Busco el usuario en mi BBDD
     try {
         User.find({
-            _id : req.params.id
+            _id: req.params.id
             //Se resuelve la promesa de mongoose
         }).then(elmnt => {
             //Si devuelve un valor que no sea array vacío...
-            if(elmnt.length !== 0) {
+            if (elmnt.length !== 0) {
                 //..almaceno el valor para mostrarlo después de borrarlo
                 let deletedUser = elmnt
                 //..borro el elemento de la BBDD
                 User.remove({
-                    _id : req.params.id
+                    _id: req.params.id
                     //Una vez se cumple la promesa de borrarlo...
                 }).then(x => {
                     //Muestro mensaje con el nombre del usuario que se ha borrado
@@ -189,8 +189,8 @@ UsersController.delete = async (req, res) => {
                 //     }
 
                 // })
-                
-                
+
+
                 //Si devuelve null quiere decir que no existen usuarios con esa id
             } else {
                 res.send('There are no users with that id in the database')
@@ -198,11 +198,36 @@ UsersController.delete = async (req, res) => {
         })
 
     } catch (error) {
-        res.send("backend delete user and his posts error: " ,error);
+        res.send("backend delete user and his posts error: ", error);
     };
 };
 
+//Get user rating
+UsersController.getRating = async (req, res) => {
 
+    await User.find({
+        _id: req.params.id
+    })
+        //Summatory of rating array
+        .then(elmnt => {
+            let sum = elmnt[0].rating.reduce((a, b) => a + b);
+            //Get average
+            sum = sum / elmnt[0].rating.length;
+            //Round to 1 decimal
+            sum = sum.toFixed(1)
+
+            //Return an object cause raw number is detected as error code
+            let result = {
+                rate: sum
+            }
+
+            res.send(result);
+        })
+
+
+
+
+}
 
 
 
