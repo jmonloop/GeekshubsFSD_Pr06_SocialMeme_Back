@@ -1,7 +1,7 @@
 ## Endpoints
 * USERS
 
-REGISTER
+REGISTER (through body)
 
     https://socialmeme.herokuapp.com/users/register (post)
 
@@ -15,7 +15,7 @@ REGISTER
          "followed": []
     }
 
-LOGIN
+LOGIN (through body)
 
      https://socialmeme.herokuapp.com/users/login (post)
 
@@ -25,26 +25,26 @@ LOGIN
         "password":"1234"
     }
 
-GET USER
+GET USER (through params)
 
      https://socialmeme.herokuapp.com/users/profile/<userId> (get)
 
-MODIFY USER
+MODIFY USER (through body)
 
      https://socialmeme.herokuapp.com/users/profile/<userId> (put)
 
-DELETE USER
+DELETE USER (through params)
 
     https://socialmeme.herokuapp.com/users/profile/<userId> (delete)
 
-GET USER AVERAGE RATING
+GET USER AVERAGE RATING (through params)
 
      https://socialmeme.herokuapp.com/users/profile/rating/<userId> (get)
 
-FOLLOW USER
+FOLLOW USER (through query)
 
     https://socialmeme.herokuapp.com/users/actions/follow?followedId=<followedUserId>&userId=<userId> (put)
 
-UNFOLLOW USER
+UNFOLLOW USER (through query)
 
     https://socialmeme.herokuapp.com/users/actions/unfollow?unfollowedId=<followedUserId>userId=<userId>
