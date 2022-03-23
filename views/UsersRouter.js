@@ -38,10 +38,12 @@ router.delete('/profile/:id', auth, UsersController.delete);
 router.get('/profile/rating/:id', UsersController.getRating);
 
 //Follow another user
-//http://localhost:5500/users/actions?followed=followdUserId&owner=userId
-router.put('/actions', auth, UsersController.follow);
+//http://localhost:5500/users/actions/follow?followedId=followedId&userId=userId
+router.put('/actions/follow', auth, UsersController.follow);
 
-
+//Unfollow another user
+//http://localhost:5500/users/actions/unfollow?unfollowedId=unfollowedId&userId=userId
+router.put('/actions/unfollow', auth, UsersController.unfollow);
 
 
 

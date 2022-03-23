@@ -229,7 +229,7 @@ UsersController.getRating = async (req, res) => {
 
 }
 
-//Get user rating
+//Follow user
 UsersController.follow = async (req, res) => {
 
     let followedId = req.query.followedId;
@@ -245,6 +245,64 @@ UsersController.follow = async (req, res) => {
             followed = elmnt[0].followed;
             //Add the new followed id to the array
             followed.push(followedId);
+
+            //Update followed users
+            User.updateOne(
+                { _id: userId }, {
+
+                $set: {
+
+                    followed: followed
+                }
+            }
+            )//If promise is done, response the edited user
+                .then(elmnt => {
+                    User.find({
+                        _id: userId
+                    }).then(user => {
+                        res.send(user)
+                    })
+                })
+
+
+        })
+
+
+
+
+
+    } catch (error) {
+        res.send("backend edit user error: ", error);
+    }
+
+
+
+
+
+}
+
+//Unfollow
+UsersController.unfollow = async (req, res) => {
+
+    let unfollowedId = req.query.unfollowedId;
+    let userId = req.query.userId;
+    //Create empty array for manage the followed field
+    let followed = [];
+    try {
+        //Find owner user
+        User.find({
+            _id: userId
+        }).then(elmnt => {
+            //Save actual followed in the array
+            followed = elmnt[0].followed;
+
+            //Find desired user id to unfollow
+            for(let i=0 ; i<followed.length ; i++){
+                if(followed[i] == unfollowedId){
+                    //remove it of followed array
+                    followed.splice(i, 1)
+                }
+            }
 
             //Update followed users
             User.updateOne(
