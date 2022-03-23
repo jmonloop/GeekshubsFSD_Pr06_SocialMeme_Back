@@ -27,6 +27,10 @@ const userSchema = new Schema ({
     avatar: {
         type: String,
         required: false
+    },
+    followed: {
+        type: Array,
+        required: false
     }
 });
 //Creo un index con los campos en los que querré buscar por cadena de texto.

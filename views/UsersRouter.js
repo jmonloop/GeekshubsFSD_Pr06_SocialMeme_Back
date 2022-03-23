@@ -31,11 +31,15 @@ router.put('/profile/:id', auth, UsersController.edit);
 router.delete('/profile/:id', auth, UsersController.delete);
 
 
+
+
 //Get user rating: returns rounded rating number
 //http://localhost:5500/users/rating/userId
 router.get('/profile/rating/:id', UsersController.getRating);
 
-
+//Follow another user
+//http://localhost:5500/users/actions?followed=followdUserId&owner=userId
+router.put('/actions', auth, UsersController.follow);
 
 
 

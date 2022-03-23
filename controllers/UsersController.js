@@ -229,6 +229,60 @@ UsersController.getRating = async (req, res) => {
 
 }
 
+//Get user rating
+UsersController.follow = async (req, res) => {
+
+    let followedId = req.query.followedId;
+    let userId = req.query.userId;
+    //Create empty array for manage the followed field
+    let followed = [];
+    try {
+        //1 Find owner user
+        User.find({
+            _id: userId
+        }).then(elmnt => {
+            //Save actual followed in the array
+            followed = elmnt[0].followed;
+            //Add the new followed id to the array
+            followed.push(followedId);
+
+            //Update followed users
+            User.updateOne(
+                { _id: userId }, {
+
+                $set: {
+
+                    followed: followed
+                }
+            }
+            )//If promise is done, response the edited user
+                .then(elmnt => {
+                    User.find({
+                        _id: userId
+                    }).then(user => {
+                        res.send(user)
+                    })
+                })
+
+
+        })
+
+
+
+
+
+    } catch (error) {
+        res.send("backend edit user error: ", error);
+    }
+
+
+
+
+
+}
+
+
+
 
 
 
