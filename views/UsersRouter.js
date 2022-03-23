@@ -22,13 +22,13 @@ router.post('/login', UsersController.login);
 //http://localhost:5500/users/profile/userId
 router.get('/profile/:id', UsersController.get);
 
-//Edit user
-//http://localhost:5500/users/profile/userId
-router.put('/profile/:id', auth, UsersController.edit);
+//Update user
+//http://localhost:5500/users/profile/update/userId
+router.put('/profile/update/:id', auth, UsersController.update);
 
 //Delete user
-//http://localhost:5500/users/userId
-router.delete('/profile/:id', auth, UsersController.delete);
+//http://localhost:5500/users/delete/userId
+router.delete('/profile/delete/:id', auth, UsersController.delete);
 
 
 

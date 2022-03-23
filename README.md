@@ -29,13 +29,13 @@ GET USER (through params)
 
      https://socialmeme.herokuapp.com/users/profile/<userId> (get)
 
-MODIFY USER (through body)
+UPDATE USER (through body)
 
-     https://socialmeme.herokuapp.com/users/profile/<userId> (put)
+     https://socialmeme.herokuapp.com/users/profile/update/<userId> (put)
 
 DELETE USER (through params)
 
-    https://socialmeme.herokuapp.com/users/profile/<userId> (delete)
+    https://socialmeme.herokuapp.com/users/profile/delete/<userId> (delete)
 
 GET USER AVERAGE RATING (through params)
 

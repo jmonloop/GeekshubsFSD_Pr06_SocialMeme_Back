@@ -114,7 +114,7 @@ UsersController.get = async (req, res) => {
 }
 
 //MÉTODO PUT PARA MODIFICAR EL PERFIL DE UN USUARIO POR ID
-UsersController.edit = async (req, res) => {
+UsersController.update = async (req, res) => {
     //Capturo el id que llega por params
     let id = req.params.id;
     try {
