@@ -47,4 +47,4 @@ FOLLOW USER
 
 UNFOLLOW USER
 
-    https://socialmeme.herokuapp.com/users/actions/unfollow?unfollowedId=<followedUserId>Id=<userId>
+    https://socialmeme.herokuapp.com/users/actions/unfollow?unfollowedId=<followedUserId>userId=<userId>
