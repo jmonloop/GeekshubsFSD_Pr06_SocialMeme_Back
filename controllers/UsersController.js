@@ -232,8 +232,9 @@ UsersController.getRating = async (req, res) => {
 //Follow user
 UsersController.follow = async (req, res) => {
 
-    let followedId = req.query.followedId;
-    let userId = req.query.userId;
+    let followedId = req.body.followedId;
+    let followedNickname = req.body.followedNickname;
+    let userId = req.body.userId;
     //Create empty array for manage the followed field
     let followed = [];
     try {
@@ -241,17 +242,20 @@ UsersController.follow = async (req, res) => {
         User.find({
             _id: userId
         }).then(elmnt => {
-            //Save actual followed in the array
+            //Save actual followed array in the variable
             followed = elmnt[0].followed;
-            //Add the new followed id to the array
-            followed.push(followedId);
+            //Add the new followed object to the variable
+            followed.push({
+                followedId: followedId,
+                followedNickname: followedNickname
+            });
 
             //Update followed users
             User.updateOne(
                 { _id: userId }, {
 
                 $set: {
-
+                    //Replace db array with current updated array of followed
                     followed: followed
                 }
             }
@@ -284,8 +288,8 @@ UsersController.follow = async (req, res) => {
 //Unfollow
 UsersController.unfollow = async (req, res) => {
 
-    let unfollowedId = req.query.unfollowedId;
-    let userId = req.query.userId;
+    let unfollowedId = req.body.unfollowedId;
+    let userId = req.body.userId;
     //Create empty array for manage the followed field
     let followed = [];
     try {
@@ -293,12 +297,12 @@ UsersController.unfollow = async (req, res) => {
         User.find({
             _id: userId
         }).then(elmnt => {
-            //Save actual followed in the array
+            //Save actual followed array the variable
             followed = elmnt[0].followed;
 
             //Find desired user id to unfollow
             for(let i=0 ; i<followed.length ; i++){
-                if(followed[i] == unfollowedId){
+                if(followed[i].followedId == unfollowedId){
                     //remove it of followed array
                     followed.splice(i, 1)
                 }
