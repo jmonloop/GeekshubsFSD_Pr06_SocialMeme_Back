@@ -207,7 +207,7 @@ PostsController.updateText = async (req, res) => {
 
 
 //RATE POST
-PostsController.addRate = async (req, res) => {
+PostsController.addRating = async (req, res) => {
 
     let id = req.body.id;
     let userId = req.body.userId;
@@ -235,8 +235,7 @@ PostsController.addRate = async (req, res) => {
 
 
 //GET RATE POST
-PostsController.getRate = async (req, res) => {
-    console.log("entro");
+PostsController.getRating = async (req, res) => {
     let id = req.params.id;
 
     try {
@@ -324,6 +323,50 @@ PostsController.addComment = async (req, res) => {
     }
 };
 
+//GET ALL POST COMMENTS
+PostsController.getAllComments = async (req, res) => {
+    let postId = req.body.postId;
+
+    try {
+        //Find owner user
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            res.send(elmnt[0].comments)
+        })
+
+    } catch (error) {
+        res.send("backend get all post comments error: ", error);
+    }
+};
+
+//GET COMMENT
+PostsController.getComment = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let commentsArr = [];
+
+    try {
+        //Find owner user
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
+
+            //Find desired comment to delete
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
+                    res.send(commentsArr[i])
+                }
+            }
+
+        })
+
+    } catch (error) {
+        res.send("backend get comment error: ", error);
+    }
+};
 
 //DELETE POST COMMENT
 PostsController.deleteComment = async (req, res) => {
@@ -340,8 +383,8 @@ PostsController.deleteComment = async (req, res) => {
             commentsArr = elmnt[0].comments;
 
             //Find desired comment to delete
-            for(let i=0 ; i<commentsArr.length ; i++){
-                if(commentsArr[i].commentId == commentId){
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
                     //remove it of followed array
                     commentsArr.splice(i, 1)
                 }
@@ -358,22 +401,140 @@ PostsController.deleteComment = async (req, res) => {
 
         })
 
+    } catch (error) {
+        res.send("backend delete comment error: ", error);
+    }
+};
 
+//UPDATE POST COMMENT
+PostsController.updateComment = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let comment = req.body.comment;
+    let updated = moment().format('DD/MM/YYYY, HH:mm:ss');
+    let commentsArr = [];
 
+    try {
+        //Find owner user
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
 
+            //Find desired comment to delete
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
+                    //update it with body data
+                    commentsArr[i].comment = comment;
+                    commentsArr[i].updated = updated;
+                }
+            }
+
+            Post.findByIdAndUpdate(postId, {
+                $set: {
+                    comments: commentsArr
+                }
+            }).setOptions({ returnDocument: 'after' })
+                .then(elmnt => {
+                    res.send(elmnt)
+                })
+
+        })
 
     } catch (error) {
-        res.send("backend edit user error: ", error);
+        res.send("backend update comment error: ", error);
     }
 };
 
 
+//ADD COMMENT RATING
+PostsController.addCommentRating = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let raterId = req.body.raterId;
+    let raterNickname = req.body.raterNickname;
+    let updated = moment().format('DD/MM/YYYY, HH:mm:ss');
+    let rate = req.body.rate;
+
+    try {
+        //Find owner user
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
+
+            //Find desired comment to rate
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
+                    //update it with body data
+                    commentsArr[i].rating.push({
+                        raterId: raterId,
+                        raterNickname: raterNickname,
+                        rate: rate
+                    })
+                    commentsArr[i].updated = updated;
+                }
+            }
+
+            Post.findByIdAndUpdate(postId, {
+                $set: {
+                    comments: commentsArr
+                }
+            }).setOptions({ returnDocument: 'after' })
+                .then(elmnt => {
+                    res.send(elmnt)
+                })
+
+        })
+
+    } catch (error) {
+        res.send("backend update comment error: ", error);
+    }
+};
 
 
+//GET COMMENT RATING
+PostsController.getCommentRating = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let commentsArr = [];
 
+    try {
+        await Post.find({
+            _id: postId
+        })
+            //Summatory of rating value of the rating array
+            .then(elmnt => {
+                commentsArr = elmnt[0].comments;
+                //Find desired comment
+                for (let i = 0; i < commentsArr.length; i++) {
+                    if (commentsArr[i].commentId == commentId) {
+                        //makes summatory of all the rates
+                        let sum = commentsArr[i].rating.reduce((a, b) => {
+                            return {
+                                rate: a.rate + b.rate
+                            }
+                        });
 
+                        //Get average
+                        sum = sum.rate / elmnt[0].rating.length;
 
+                        //Round to 1 decimal
+                        sum = sum.toFixed(1)
 
+                        res.send(sum);
+
+                    }
+                }
+
+            })
+
+    } catch (error) {
+        res.send("backend get comment rating error: ", error)
+    }
+};
 
 
 //Exporto UsuariosController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)

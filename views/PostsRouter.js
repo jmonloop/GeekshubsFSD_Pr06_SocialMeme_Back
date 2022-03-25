@@ -49,12 +49,12 @@ router.put('/actions/updateText', PostsController.updateText);
 
 //ADD RATE
 // http://localhost:5500/posts/actions/addRate
-router.put('/actions/addRate', PostsController.addRate);
+router.put('/actions/addRating', PostsController.addRating);
 
 
 //GET RATE
 // http://localhost:5500/posts/actions/getRate/postId
-router.get('/actions/getRate/:id', PostsController.getRate);
+router.get('/actions/getRating/:id', PostsController.getRating);
 
 
 //UPDATE POST KEYWORDS
@@ -66,13 +66,32 @@ router.put('/actions/updateKeywords', PostsController.updateKeywords);
 // http://localhost:5500/posts/actions/addComment
 router.put('/actions/addComment', PostsController.addComment);
 
+//GET ALL COMMENTS
+// http://localhost:5500/posts/actions/getAllComments
+router.get('/actions/getAllComments', PostsController.getAllComments);
+
+//GET COMMENT
+// http://localhost:5500/posts/actions/getComment
+router.get('/actions/getComment', PostsController.getComment);
+
 //DELETE COMMENT
 // http://localhost:5500/posts/actions/deleteComment
 router.put('/actions/deleteComment', PostsController.deleteComment);
 
 
+//UPDATE COMMENT
+// http://localhost:5500/posts/actions/updateComment
+router.put('/actions/updateComment', PostsController.updateComment);
 
 
+//ADD COMMENT RATING
+// http://localhost:5500/posts/actions/addCommentRating
+router.put('/actions/addCommentRating', PostsController.addCommentRating);
+
+
+//GET COMMENT RATING
+// http://localhost:5500/posts/actions/getCommentRating
+router.get('/actions/getCommentRating', PostsController.getCommentRating);
 
 
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
