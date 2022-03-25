@@ -109,10 +109,14 @@ router.put('/actions/deleteCommentAnswer', PostsController.deleteCommentAnswer);
 router.put('/actions/updateCommentAnswer', PostsController.updateCommentAnswer);
 
 
+//GET COMMENT ANSWER
+// http://localhost:5500/posts/actions/getCommentAnswer
+router.get('/actions/getCommentAnswer', PostsController.getCommentAnswer);
 
 
-
-
+//GET ALL COMMENT ANSWERS
+// http://localhost:5500/posts/actions/getAllCommentAnswers
+router.get('/actions/getAllCommentAnswers', PostsController.getAllCommentAnswers);
 
 
 

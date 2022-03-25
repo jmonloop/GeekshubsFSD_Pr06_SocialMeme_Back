@@ -538,7 +538,7 @@ PostsController.getCommentRating = async (req, res) => {
 
 
 //ADD COMMENT ANSWER
-PostsController.addCommentAnswer= async (req, res) => {
+PostsController.addCommentAnswer = async (req, res) => {
     let answerId = mongoose.Types.ObjectId();
     let postId = req.body.postId;
     let commentId = req.body.commentId;
@@ -607,8 +607,8 @@ PostsController.deleteCommentAnswer = async (req, res) => {
                     //Save actual answers array in the variable
                     answersArr = commentsArr[i].answers;
                     //Find desired answer to delete
-                    for(let j=0 ; j<answersArr.length ; j++){
-                        if(answersArr[j].answerId == answerId) {
+                    for (let j = 0; j < answersArr.length; j++) {
+                        if (answersArr[j].answerId == answerId) {
                             answersArr.splice(j, 1)
                         }
                     }
@@ -658,8 +658,8 @@ PostsController.updateCommentAnswer = async (req, res) => {
                     //Save actual answers array in the variable
                     answersArr = commentsArr[i].answers;
                     //Find desired answer to delete
-                    for(let j=0 ; j<answersArr.length ; j++){
-                        if(answersArr[j].answerId == answerId) {
+                    for (let j = 0; j < answersArr.length; j++) {
+                        if (answersArr[j].answerId == answerId) {
                             answersArr[j].answer = answer;
                             answersArr[j].updated = updated;
                         }
@@ -687,10 +687,68 @@ PostsController.updateCommentAnswer = async (req, res) => {
 };
 
 
+//GET COMMENT ANSWER
+PostsController.getCommentAnswer = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let answerId = req.body.answerId;
+    let commentsArr = [];
+    let answersArr = [];
+
+    try {
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
+
+            //Find desired comment with the answer
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
+                    //Save actual answers array in the variable
+                    answersArr = commentsArr[i].answers;
+                    //Find desired answer
+                    for (let j = 0; j < answersArr.length; j++) {
+                        if (answersArr[j].answerId == answerId) {
+                            res.send(answersArr[j])
+                        }
+                    }
+                }
+            }
+        })
+
+    } catch (error) {
+        res.send("backend get comment answer error: ", error);
+    }
+};
 
 
+//GET ALL COMMENT ANSWERS
+PostsController.getAllCommentAnswers = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let commentsArr = [];
 
+    try {
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
 
+            //Find desired comment with the answers
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
+                    //Save actual answers array in the variable
+                    res.send(commentsArr[i].answers);
+                }
+            }
+        })
+
+    } catch (error) {
+        res.send("backend get all comment answers error: ", error);
+    }
+};
 
 
 
