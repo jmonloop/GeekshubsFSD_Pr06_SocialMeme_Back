@@ -94,5 +94,27 @@ router.put('/actions/addCommentRating', PostsController.addCommentRating);
 router.get('/actions/getCommentRating', PostsController.getCommentRating);
 
 
+//ADD COMMENT ANSWER
+// http://localhost:5500/posts/actions/addCommentAnswer
+router.put('/actions/addCommentAnswer', PostsController.addCommentAnswer);
+
+
+//DELETE COMMENT ANSWER
+// http://localhost:5500/posts/actions/deleteCommentAnswer
+router.put('/actions/deleteCommentAnswer', PostsController.deleteCommentAnswer);
+
+
+//UPDATE COMMENT ANSWER
+// http://localhost:5500/posts/actions/updateCommentAnswer
+router.put('/actions/updateCommentAnswer', PostsController.updateCommentAnswer);
+
+
+
+
+
+
+
+
+
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;

@@ -537,5 +537,162 @@ PostsController.getCommentRating = async (req, res) => {
 };
 
 
+//ADD COMMENT ANSWER
+PostsController.addCommentAnswer= async (req, res) => {
+    let answerId = mongoose.Types.ObjectId();
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let ownerId = req.body.ownerId;
+    let ownerNickname = req.body.ownerNickname;
+    let answer = req.body.answer;
+    let created = moment().format('DD/MM/YYYY, HH:mm:ss');
+    let commentsArr = [];
+
+    try {
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
+
+            //Find desired comment to add answer
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
+                    //Add new answer
+                    commentsArr[i].answers.push({
+                        answerId: answerId,
+                        ownerId: ownerId,
+                        ownerNickname: ownerNickname,
+                        answer: answer,
+                        created: created
+                    })
+                }
+            }
+
+            Post.findByIdAndUpdate(postId, {
+                $set: {
+                    comments: commentsArr
+                }
+            }).setOptions({ returnDocument: 'after' })
+                .then(elmnt => {
+                    res.send(elmnt)
+                })
+
+        })
+
+    } catch (error) {
+        res.send("backend add answer to comment error: ", error);
+    }
+};
+
+
+//DELETE COMMENT ANSWER
+PostsController.deleteCommentAnswer = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let answerId = req.body.answerId;
+    let commentsArr = [];
+    let answersArr = [];
+
+    try {
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
+
+            //Find desired comment with the answer
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
+                    //Save actual answers array in the variable
+                    answersArr = commentsArr[i].answers;
+                    //Find desired answer to delete
+                    for(let j=0 ; j<answersArr.length ; j++){
+                        if(answersArr[j].answerId == answerId) {
+                            answersArr.splice(j, 1)
+                        }
+                    }
+
+                    //Save updated answersArr into comments
+                    commentsArr[i].answers = answersArr;
+                }
+            }
+
+            Post.findByIdAndUpdate(postId, {
+                $set: {
+                    comments: commentsArr
+                }
+            }).setOptions({ returnDocument: 'after' })
+                .then(elmnt => {
+                    res.send(elmnt)
+                })
+
+        })
+
+    } catch (error) {
+        res.send("backend delete comment answer error: ", error);
+    }
+};
+
+
+//UPDATE COMMENT ANSWER
+PostsController.updateCommentAnswer = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let answerId = req.body.answerId;
+    let answer = req.body.answer;
+    let updated = moment().format('DD/MM/YYYY, HH:mm:ss');
+    let commentsArr = [];
+    let answersArr = [];
+
+    try {
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
+
+            //Find desired comment with the answer
+            for (let i = 0; i < commentsArr.length; i++) {
+                if (commentsArr[i].commentId == commentId) {
+                    //Save actual answers array in the variable
+                    answersArr = commentsArr[i].answers;
+                    //Find desired answer to delete
+                    for(let j=0 ; j<answersArr.length ; j++){
+                        if(answersArr[j].answerId == answerId) {
+                            answersArr[j].answer = answer;
+                            answersArr[j].updated = updated;
+                        }
+                    }
+
+                    //Save updated answersArr into comments
+                    commentsArr[i].answers = answersArr;
+                }
+            }
+
+            Post.findByIdAndUpdate(postId, {
+                $set: {
+                    comments: commentsArr
+                }
+            }).setOptions({ returnDocument: 'after' })
+                .then(elmnt => {
+                    res.send(elmnt)
+                })
+
+        })
+
+    } catch (error) {
+        res.send("backend delete comment answer error: ", error);
+    }
+};
+
+
+
+
+
+
+
+
+
 //Exporto UsuariosController para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = PostsController;
