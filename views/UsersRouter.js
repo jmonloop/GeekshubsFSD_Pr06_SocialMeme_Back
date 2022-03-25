@@ -27,8 +27,9 @@ router.get('/profile/:id', UsersController.get);
 router.put('/profile/update/:id', auth, UsersController.update);
 
 //Delete user
-//http://localhost:5500/users/delete/userId
-router.delete('/profile/delete/:id', auth, UsersController.delete);
+//http://localhost:5500/users/delete
+router.delete('/profile/delete', UsersController.delete);
+// router.delete('/profile/delete', auth, UsersController.delete);
 
 
 

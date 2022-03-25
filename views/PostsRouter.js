@@ -20,10 +20,13 @@ router.post('/create', PostsController.create);
 
 //DELETE POST: delete post
 // http://localhost:5500/posts/delete
-router.post('/delete', PostsController.delete);
+router.delete('/delete', PostsController.delete);
 // router.post('/create', auth, PostsController.create);
 
-
+//UPDATE POST: update post
+// http://localhost:5500/posts/update
+router.put('/update', PostsController.update);
+// router.post('/update', auth, PostsController.update);
 
 
 

@@ -34,7 +34,7 @@ PostsController.refreshToken = async (req, res) => {
         console.log("error", error)
         res.send(error)
     }
-   
+
 };
 
 //CREATE POST
@@ -74,13 +74,44 @@ PostsController.delete = async (req, res) => {
     let id = req.body.id;
 
     try {
-       await Post.findByIdAndDelete(id)
-        .then(elmnt=>{
-            res.send(elmnt)
-        })
+        await Post.findByIdAndDelete(id)
+            .then(elmnt => {
+                res.send(elmnt)
+            })
     } catch (error) {
         console.log("Error deleting post", error);
         res.send("Error deleting post", error);
+    }
+};
+
+//UPDATE POST
+PostsController.update = async (req, res) => {
+
+    let id = req.body.id
+    let title = req.body.title;
+    let img = req.body.img;
+    let text = req.body.text;
+    let rating = req.body.rating;
+    let keywords = req.body.keywords;
+    let comments = req.body.comments;
+
+    try {
+        await Post.findByIdAndUpdate(id, {
+            $set: {
+                title: req.body.title,
+                img: req.body.img,
+                text: req.body.text,
+                rating: req.body.rating,
+                keywords: req.body.keywords,
+                comments: req.body.comments,
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error updating post", error);
+        res.send("Error updating post", error);
     }
 };
 
