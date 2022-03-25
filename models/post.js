@@ -1,13 +1,19 @@
 const mongoose = require("mongoose");
+const moment = require('moment');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema ({
-    userId: {
+    ownerId: {
+        type: String,
+        required: true
+    },
+    ownerNickname: {
         type: String,
         required: true
     },
     title: {
         type: String,
+        required: true
     },
     img: {
         type: String,
@@ -26,9 +32,12 @@ const postSchema = new Schema ({
     comments: {
         type: Array
     },
-    avatar: {
+    created: {
         type: String,
-        required: false
+        default: moment().format('DD/MM/YYYY, HH:mm:ss')
+    },
+    updated: {
+        type: String
     }
 });
 //Creo un index con los campos en los que querré buscar por cadena de texto.

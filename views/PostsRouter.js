@@ -10,11 +10,11 @@ const isAdmin = require("../middlewares/isAdmin");
 //Importo el fichero UsuariosController y lo guardo en la variable UsuariosController. Luego habrá que crearlo.
 const PostsController = require('../controllers/PostsController');
 
-//REFRESH IMGUR TOKEN
+//REFRESH IMGUR TOKEN (spare)
 // http://localhost:5500/posts/refreshToken
 router.post('/refreshToken', PostsController.refreshToken);
 
-//CREATE POST
+//CREATE POST: upload image and creates post in db
 // http://localhost:5500/posts/create
 router.post('/create', PostsController.create);
 
