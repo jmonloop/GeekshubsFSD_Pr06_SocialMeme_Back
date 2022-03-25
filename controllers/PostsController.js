@@ -68,7 +68,21 @@ PostsController.create = async (req, res) => {
     }
 };
 
+//DELETE POST
+PostsController.delete = async (req, res) => {
 
+    let id = req.body.id;
+
+    try {
+       await Post.findByIdAndDelete(id)
+        .then(elmnt=>{
+            res.send(elmnt)
+        })
+    } catch (error) {
+        console.log("Error deleting post", error);
+        res.send("Error deleting post", error);
+    }
+};
 
 
 

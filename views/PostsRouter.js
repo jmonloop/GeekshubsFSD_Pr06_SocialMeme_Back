@@ -14,11 +14,14 @@ const PostsController = require('../controllers/PostsController');
 // http://localhost:5500/posts/refreshToken
 router.post('/refreshToken', PostsController.refreshToken);
 
-//CREATE POST: upload image and creates post in db
+//CREATE POST: creates post in db
 // http://localhost:5500/posts/create
 router.post('/create', PostsController.create);
 
-
+//DELETE POST: delete post
+// http://localhost:5500/posts/delete
+router.post('/delete', PostsController.delete);
+// router.post('/create', auth, PostsController.create);
 
 
 
