@@ -11,6 +11,7 @@ const { default: axios } = require('axios');
 const PostsController = {};
 let currentToken;
 const moment = require('moment')
+const mongoose = require("mongoose");
 
 
 
@@ -36,6 +37,7 @@ PostsController.refreshToken = async (req, res) => {
     }
 
 };
+
 
 //CREATE POST
 PostsController.create = async (req, res) => {
@@ -68,6 +70,7 @@ PostsController.create = async (req, res) => {
     }
 };
 
+
 //GET POST
 PostsController.get = async (req, res) => {
 
@@ -87,6 +90,7 @@ PostsController.get = async (req, res) => {
 
 };
 
+
 //DELETE POST
 PostsController.delete = async (req, res) => {
 
@@ -102,6 +106,7 @@ PostsController.delete = async (req, res) => {
         res.send("Error deleting post", error);
     }
 };
+
 
 //UPDATE POST
 PostsController.update = async (req, res) => {
@@ -134,6 +139,7 @@ PostsController.update = async (req, res) => {
     }
 };
 
+
 //UPDATE POST TITLE
 PostsController.updateTitle = async (req, res) => {
 
@@ -154,6 +160,7 @@ PostsController.updateTitle = async (req, res) => {
         res.send("Error updating post title", error);
     }
 };
+
 
 //UPDATE POST IMG
 PostsController.updateImg = async (req, res) => {
@@ -176,6 +183,7 @@ PostsController.updateImg = async (req, res) => {
     }
 };
 
+
 //UPDATE POST TEXT
 PostsController.updateText = async (req, res) => {
 
@@ -197,8 +205,9 @@ PostsController.updateText = async (req, res) => {
     }
 };
 
+
 //RATE POST
-PostsController.rate = async (req, res) => {
+PostsController.addRate = async (req, res) => {
 
     let id = req.body.id;
     let userId = req.body.userId;
@@ -224,9 +233,10 @@ PostsController.rate = async (req, res) => {
     }
 };
 
+
 //GET RATE POST
 PostsController.getRate = async (req, res) => {
-
+    console.log("entro");
     let id = req.params.id;
 
     try {
@@ -258,9 +268,104 @@ PostsController.getRate = async (req, res) => {
 };
 
 
+//UPDATE POST KEYWORDS
+PostsController.updateKeywords = async (req, res) => {
+
+    let id = req.body.id
+    let keywords = req.body.keywords;
+
+    try {
+        await Post.findByIdAndUpdate(id, {
+            $set: {
+                keywords: keywords
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error updating post keywords", error);
+        res.send("Error updating post keywords", error);
+    }
+};
+
+
+//ADD POST COMMENT
+PostsController.addComment = async (req, res) => {
+    let commentId = mongoose.Types.ObjectId();
+    let postId = req.body.postId;
+    let ownerId = req.body.ownerId;
+    let ownerNickname = req.body.ownerNickname;
+    let comment = req.body.comment;
+    let created = moment().format('DD/MM/YYYY, HH:mm:ss');
+    let answers = [];
+    let rating = [];
+
+    try {
+        await Post.findByIdAndUpdate(postId, {
+            $push: {
+                comments: {
+                    commentId: commentId,
+                    ownerId: ownerId,
+                    ownerNickname: ownerNickname,
+                    comment: comment,
+                    created: created,
+                    answers: answers,
+                    rating: rating
+                }
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error adding comment to post", error);
+        res.send("Error adding comment to post", error);
+    }
+};
+
+
+//DELETE POST COMMENT
+PostsController.deleteComment = async (req, res) => {
+    let postId = req.body.postId;
+    let commentId = req.body.commentId;
+    let commentsArr = [];
+
+    try {
+        //Find owner user
+        Post.find({
+            _id: postId
+        }).then(elmnt => {
+            //Save actual comments array in the variable
+            commentsArr = elmnt[0].comments;
+
+            //Find desired comment to delete
+            for(let i=0 ; i<commentsArr.length ; i++){
+                if(commentsArr[i].commentId == commentId){
+                    //remove it of followed array
+                    commentsArr.splice(i, 1)
+                }
+            }
+
+            Post.findByIdAndUpdate(postId, {
+                $set: {
+                    comments: commentsArr
+                }
+            }).setOptions({ returnDocument: 'after' })
+                .then(elmnt => {
+                    res.send(elmnt)
+                })
+
+        })
 
 
 
+
+
+    } catch (error) {
+        res.send("backend edit user error: ", error);
+    }
+};
 
 
 

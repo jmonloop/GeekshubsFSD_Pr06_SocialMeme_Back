@@ -25,43 +25,50 @@ router.get('/get/:id', PostsController.get);
 //DELETE POST: delete post
 // http://localhost:5500/posts/delete
 router.delete('/delete', PostsController.delete);
-// router.post('/create', auth, PostsController.create);
 
-//UPDATE POST: update post
+
+//UPDATE POST: update whole post
 // http://localhost:5500/posts/update
 router.put('/update', PostsController.update);
-// router.put('/update', auth, PostsController.update);
+
 
 //UPDATE POST TITLE
-// http://localhost:5500/posts/update/title
-router.put('/update/title', PostsController.updateTitle);
-// router.put('/update/title', auth, PostsController.update/title);
+// http://localhost:5500/posts/actions/updateTitle
+router.put('/actions/updateTitle', PostsController.updateTitle);
+
 
 //UPDATE POST IMAGE
-// http://localhost:5500/posts/update/img
-router.put('/update/img', PostsController.updateImg);
-// router.put('/update/img', auth, PostsController.update/img);
+// http://localhost:5500/posts/actions/updateImg
+router.put('/actions/updateImg', PostsController.updateImg);
 
-//UPDATE POST IMAGE
-// http://localhost:5500/posts/update/text
-router.put('/update/text', PostsController.updateText);
-// router.put('/update/text', auth, PostsController.update/text);
 
-//RATE
-// http://localhost:5500/posts/update/rate
-router.put('/update/rate', PostsController.rate);
-// router.put('/update/rate', auth, PostsController.update/rate);
+//UPDATE POST TEXT
+// http://localhost:5500/posts/actions/updateText
+router.put('/actions/updateText', PostsController.updateText);
+
+
+//ADD RATE
+// http://localhost:5500/posts/actions/addRate
+router.put('/actions/addRate', PostsController.addRate);
+
 
 //GET RATE
-// http://localhost:5500/posts/getRate/postId
-router.get('/getRate/:id', PostsController.getRate);
-// router.put('/update/rate', auth, PostsController.update/rate);
+// http://localhost:5500/posts/actions/getRate/postId
+router.get('/actions/getRate/:id', PostsController.getRate);
 
 
+//UPDATE POST KEYWORDS
+// http://localhost:5500/posts/actions/updateKeywords
+router.put('/actions/updateKeywords', PostsController.updateKeywords);
 
 
+//ADD COMMENT
+// http://localhost:5500/posts/actions/addComment
+router.put('/actions/addComment', PostsController.addComment);
 
-
+//DELETE COMMENT
+// http://localhost:5500/posts/actions/deleteComment
+router.put('/actions/deleteComment', PostsController.deleteComment);
 
 
 
