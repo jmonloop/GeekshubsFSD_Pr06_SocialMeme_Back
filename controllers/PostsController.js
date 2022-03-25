@@ -68,6 +68,25 @@ PostsController.create = async (req, res) => {
     }
 };
 
+//GET POST
+PostsController.get = async (req, res) => {
+
+    let id = req.params.id;
+
+
+    try {
+        await Post.find({
+            _id: id
+        })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        res.send("backend getPost error: ", error)
+    }
+
+};
+
 //DELETE POST
 PostsController.delete = async (req, res) => {
 
@@ -115,10 +134,128 @@ PostsController.update = async (req, res) => {
     }
 };
 
+//UPDATE POST TITLE
+PostsController.updateTitle = async (req, res) => {
 
+    let id = req.body.id
+    let title = req.body.title;
 
+    try {
+        await Post.findByIdAndUpdate(id, {
+            $set: {
+                title: title
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error updating post title", error);
+        res.send("Error updating post title", error);
+    }
+};
 
+//UPDATE POST IMG
+PostsController.updateImg = async (req, res) => {
 
+    let id = req.body.id
+    let img = req.body.img;
+
+    try {
+        await Post.findByIdAndUpdate(id, {
+            $set: {
+                img: img
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error updating post img", error);
+        res.send("Error updating post img", error);
+    }
+};
+
+//UPDATE POST TEXT
+PostsController.updateText = async (req, res) => {
+
+    let id = req.body.id
+    let text = req.body.text;
+
+    try {
+        await Post.findByIdAndUpdate(id, {
+            $set: {
+                text: text
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error updating post text", error);
+        res.send("Error updating post text", error);
+    }
+};
+
+//RATE POST
+PostsController.rate = async (req, res) => {
+
+    let id = req.body.id;
+    let userId = req.body.userId;
+    let userNickname = req.body.userNickname;
+    let rate = req.body.rate;
+
+    try {
+        await Post.findByIdAndUpdate(id, {
+            $push: {
+                rating: {
+                    userId: userId,
+                    userNickname: userNickname,
+                    rate: rate
+                }
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error rating post", error);
+        res.send("Error rating post", error);
+    }
+};
+
+//GET RATE POST
+PostsController.getRate = async (req, res) => {
+
+    let id = req.params.id;
+
+    try {
+        await Post.find({
+            _id: id
+        })
+            //Summatory of rate value of the rating array
+            .then(elmnt => {
+                let sum = elmnt[0].rating.reduce((a, b) => {
+                    return {
+                        rate: a.rate + b.rate
+                    }
+                });
+
+                //Get average
+                sum = sum.rate / elmnt[0].rating.length;
+
+                //Round to 1 decimal
+                sum = sum.toFixed(1)
+
+                res.send(sum);
+
+            })
+
+    } catch (error) {
+        res.send("backend get rate error: ", error)
+    }
+
+};
 
 
 

@@ -18,6 +18,10 @@ router.post('/refreshToken', PostsController.refreshToken);
 // http://localhost:5500/posts/create
 router.post('/create', PostsController.create);
 
+//GET POST
+// http://localhost:5500/posts/get/postId
+router.get('/get/:id', PostsController.get);
+
 //DELETE POST: delete post
 // http://localhost:5500/posts/delete
 router.delete('/delete', PostsController.delete);
@@ -26,7 +30,39 @@ router.delete('/delete', PostsController.delete);
 //UPDATE POST: update post
 // http://localhost:5500/posts/update
 router.put('/update', PostsController.update);
-// router.post('/update', auth, PostsController.update);
+// router.put('/update', auth, PostsController.update);
+
+//UPDATE POST TITLE
+// http://localhost:5500/posts/update/title
+router.put('/update/title', PostsController.updateTitle);
+// router.put('/update/title', auth, PostsController.update/title);
+
+//UPDATE POST IMAGE
+// http://localhost:5500/posts/update/img
+router.put('/update/img', PostsController.updateImg);
+// router.put('/update/img', auth, PostsController.update/img);
+
+//UPDATE POST IMAGE
+// http://localhost:5500/posts/update/text
+router.put('/update/text', PostsController.updateText);
+// router.put('/update/text', auth, PostsController.update/text);
+
+//RATE
+// http://localhost:5500/posts/update/rate
+router.put('/update/rate', PostsController.rate);
+// router.put('/update/rate', auth, PostsController.update/rate);
+
+//GET RATE
+// http://localhost:5500/posts/getRate/postId
+router.get('/getRate/:id', PostsController.getRate);
+// router.put('/update/rate', auth, PostsController.update/rate);
+
+
+
+
+
+
+
 
 
 
