@@ -25,6 +25,9 @@ const postSchema = new Schema ({
     rating: {
         type: Array,
     },
+    ratingAverage: {
+        type: Number,
+    },
     keywords: {
         type: Array,
         required: true

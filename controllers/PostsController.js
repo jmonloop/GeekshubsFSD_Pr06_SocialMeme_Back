@@ -50,6 +50,7 @@ PostsController.create = async (req, res) => {
     let img = req.body.img;
     let text = req.body.text;
     let rating = [];
+    let ratingAverage = 0;
     let keywords = req.body.keywords;
     let comments = [];
 
@@ -61,6 +62,7 @@ PostsController.create = async (req, res) => {
             img: img,
             text: text,
             rating: rating,
+            ratingAverage: ratingAverage,
             keywords: keywords,
             comments: comments
         }).then(elmnt => {
@@ -215,6 +217,7 @@ PostsController.addRating = async (req, res) => {
     let raterId = req.body.raterId;
     let raterNickname = req.body.raterNickname;
     let rate = req.body.rate;
+    let sum;
 
     try {
         await Post.findByIdAndUpdate(postId, {
@@ -225,14 +228,54 @@ PostsController.addRating = async (req, res) => {
                     rate: rate
                 }
             }
+        })
+    } catch (error) {
+        console.log("Error rating post", error);
+        res.send("Error rating post", error);
+    }
+
+    try {
+        await Post.find({
+            _id: postId
+        })
+            //Summatory of rate value of the rating array
+            .then(elmnt => {
+                if (elmnt[0].rating.length > 1) {
+                    sum = elmnt[0].rating.reduce((a, b) => {
+                        return {
+                            rate: a.rate + b.rate
+                        }
+                    });
+
+                    //Get average
+                    sum = sum.rate / elmnt[0].rating.length;
+
+                    //Round to 1 decimal
+                    sum = sum.toFixed(1)
+
+                }
+            })
+    } catch (error) {
+        console.log("Error sum rating post", error);
+        res.send("Error sum rating post", error);
+    }
+
+
+    try {
+        await Post.findByIdAndUpdate(postId, {
+            ratingAverage: sum
+
         }).setOptions({ returnDocument: 'after' })
             .then(elmnt => {
                 res.send(elmnt)
             })
     } catch (error) {
-        console.log("Error rating post", error);
-        res.send("Error rating post", error);
+        console.log("Error updating post rating average", error);
+        res.send("Error updating post rating average", error);
     }
+
+
+
 };
 
 
@@ -246,19 +289,11 @@ PostsController.getRating = async (req, res) => {
         })
             //Summatory of rate value of the rating array
             .then(elmnt => {
-                let sum = elmnt[0].rating.reduce((a, b) => {
-                    return {
-                        rate: a.rate + b.rate
-                    }
+
+                console.log(elmnt[0].ratingAverage);
+                res.send({
+                    ratingAverage: elmnt[0].ratingAverage
                 });
-
-                //Get average
-                sum = sum.rate / elmnt[0].rating.length;
-
-                //Round to 1 decimal
-                sum = sum.toFixed(1)
-
-                res.send(sum);
 
             })
 
@@ -301,6 +336,7 @@ PostsController.addComment = async (req, res) => {
     let created = moment().format('DD/MM/YYYY, HH:mm:ss');
     let answers = [];
     let rating = [];
+    let ratingAverage = 0;
 
     try {
         await Post.findByIdAndUpdate(postId, {
@@ -312,7 +348,8 @@ PostsController.addComment = async (req, res) => {
                     comment: comment,
                     created: created,
                     answers: answers,
-                    rating: rating
+                    rating: rating,
+                    ratingAverage: ratingAverage
                 }
             }
         }).setOptions({ returnDocument: 'after' })
@@ -458,6 +495,8 @@ PostsController.addCommentRating = async (req, res) => {
     let raterNickname = req.body.raterNickname;
     let updated = moment().format('DD/MM/YYYY, HH:mm:ss');
     let rate = req.body.rate;
+    let ratingAverage;
+    let sum;
 
     try {
         //Find owner user
@@ -477,8 +516,28 @@ PostsController.addCommentRating = async (req, res) => {
                         rate: rate
                     })
                     commentsArr[i].updated = updated;
+
+                    if (commentsArr.length !== 0) {
+                        sum = commentsArr[i].rating.reduce((a, b) => {
+                            return {
+                                rate: a.rate + b.rate
+                            }
+                        });
+
+                        //Get average
+                        sum = sum.rate / elmnt[0].rating.length;
+
+                        //Round to 1 decimal
+                        sum = sum.toFixed(1)
+
+                        commentsArr[i].ratingAverage = sum;
+                    }
                 }
+
+
             }
+
+
 
             Post.findByIdAndUpdate(postId, {
                 $set: {
@@ -513,20 +572,10 @@ PostsController.getCommentRating = async (req, res) => {
                 //Find desired comment
                 for (let i = 0; i < commentsArr.length; i++) {
                     if (commentsArr[i].commentId == commentId) {
-                        //makes summatory of all the rates
-                        let sum = commentsArr[i].rating.reduce((a, b) => {
-                            return {
-                                rate: a.rate + b.rate
-                            }
+
+                        res.send({
+                            ratingAverage: commentsArr[i].ratingAverage
                         });
-
-                        //Get average
-                        sum = sum.rate / elmnt[0].rating.length;
-
-                        //Round to 1 decimal
-                        sum = sum.toFixed(1)
-
-                        res.send(sum);
 
                     }
                 }
@@ -762,7 +811,7 @@ PostsController.getPostsByUser = async (req, res) => {
             ownerId: ownerId
         }).then(elmnt => {
             console.log(elmnt)
-           res.send(elmnt)
+            res.send(elmnt)
         })
 
     } catch (error) {
@@ -778,45 +827,45 @@ PostsController.find = async (req, res) => {
 
     //If search term is not a number...
 
-        await Post.find({
-            //Search in Posts string fields using regex
-            $or: [
-                { ownerNickname: {$regex: new RegExp(term), $options:"i"}},
-                { title: {$regex: new RegExp(term), $options:"i"}},
-                { text: {$regex: new RegExp(term), $options:"i"}},
-                { keywords: {$regex: new RegExp(term), $options:"i"}},
-                { "comments.comment": {$regex: new RegExp(term), $options:"i"}},
-                { "comments.answers.answer": {$regex: new RegExp(term), $options:"i"}},
-            ]
-        }).then(stringElmnt => {
-            if(stringElmnt.length !== 0) {
-                results = {
-                    postsResults: stringElmnt
-                }
-            } else {
-                results = {
-                    postsResults: []
-                }
+    await Post.find({
+        //Search in Posts string fields using regex
+        $or: [
+            { ownerNickname: { $regex: new RegExp(term), $options: "i" } },
+            { title: { $regex: new RegExp(term), $options: "i" } },
+            { text: { $regex: new RegExp(term), $options: "i" } },
+            { keywords: { $regex: new RegExp(term), $options: "i" } },
+            { "comments.comment": { $regex: new RegExp(term), $options: "i" } },
+            { "comments.answers.answer": { $regex: new RegExp(term), $options: "i" } },
+        ]
+    }).then(stringElmnt => {
+        if (stringElmnt.length !== 0) {
+            results = {
+                postsResults: stringElmnt
             }
-        })
-
-
-        await User.find({
-
-            $or: [
-                { nickname: {$regex: new RegExp(term), $options:"i"}},
-               
-            ]
-        }).then(stringElmnt => {
-            if(stringElmnt.length !== 0) {
-                results.usersResults = stringElmnt;
-            } else {
-                results.usersResults = [];
+        } else {
+            results = {
+                postsResults: []
             }
-        })
+        }
+    })
 
-        res.send(results);
-    
+
+    await User.find({
+
+        $or: [
+            { nickname: { $regex: new RegExp(term), $options: "i" } },
+
+        ]
+    }).then(stringElmnt => {
+        if (stringElmnt.length !== 0) {
+            results.usersResults = stringElmnt;
+        } else {
+            results.usersResults = [];
+        }
+    })
+
+    res.send(results);
+
 };
 
 

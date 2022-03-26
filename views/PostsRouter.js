@@ -48,7 +48,7 @@ router.put('/actions/updateText', PostsController.updateText);
 
 
 //ADD RATE
-// http://localhost:5500/posts/actions/addRate
+// http://localhost:5500/posts/actions/addRating
 router.put('/actions/addRating', PostsController.addRating);
 
 
