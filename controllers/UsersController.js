@@ -16,29 +16,14 @@ const UsersController = {};
 //USER REGISTER
 UsersController.register = async (req, res) => {
 
-    //Declaramos variables para recoger los datos que llegarán por body en formato json.
-    //el nombre de la variable por convención suele ser el mismo que tiene cada atributo (columna) en la tabla User de mongoDB
-    let email = req.body.email; //lo que va después de "body" (".name" en este caso) es como se llama cada key que recibe desde body
-    //Encriptamos el campo password antes de guardarlo en la BBDD
+
+    let email = req.body.email;
     let password = bcrypt.hashSync(req.body.password, Number.parseInt(authConfig.rounds));
     let nickname = req.body.nickname;
-    let rol = req.body.rol;
     let rating = req.body.rating;
     let avatar = req.body.avatar;
 
-    //Para estas variables luego haremos post desde Postman con este json en el body:
-    // {
-    //     "email":"ivan@gmail.com",
-    //     "password":"1234",
-    //      "nickname": "ivandafacker"
-    // }
 
-    //Comprobación de errores.....
-    //Aquí haríamos console.logs en caso de fallo
-    //Guardamos en mongo el usuario
-
-
-    //Antes de registrar el usuario comprobamos si ya existe en la BBDD haciendo find con email o nickname
     await User.find({
         $or: [
             { email: email },
@@ -50,7 +35,6 @@ UsersController.register = async (req, res) => {
                 email: email,
                 password: password,
                 nickname: nickname,
-                rol: rol,
                 rating: rating,
                 avatar: avatar
             }).then(elmnt => {
@@ -62,45 +46,40 @@ UsersController.register = async (req, res) => {
     })
 };
 
-//Método post para loguearse metiendo los datos por body y generar un token nuevo en caso de login satisfactorio.
-//El usuario debe estar registrado en la BBDD con un email y password válidos
+//USER LOGIN
 UsersController.login = async (req, res) => {
-    let email = req.body.email;    // Cogemos el email del body
-    let password = req.body.password; //cogemos el password del body
+    let email = req.body.email;
+    let password = req.body.password;
 
-    await User.find({                   //Buscamos el email para verificar que ese usuario está registrado en nuestra BBDD
-        email: email   //Si el atributo email coincide con el campo email del body...
-
+    await User.find({
+        email: email
     }).then(elmnt => {
-        //(callback del método findOne que en este caso es lo que haya encontrado)
-        if (!elmnt) {   //..si no existe en nuestra BBDD...
-            res.send("Invalid email or password");    //..muestra mensaje de que el login es inválido
-        } else {   //Si sí que existe..
-            if (bcrypt.compareSync(password, elmnt[0].password)) { //Compara contraseña que le manda el body con la que tiene guardada ese usuario en la BBDD (desencriptándola)
-                let token = jwt.sign({ usuario: elmnt }, authConfig.secret, { //Si son iguales, genera un token
-                    expiresIn: authConfig.expires //que expira en un tiempo determinado según lo que haya en ../config/auth
+        if (!elmnt) {
+            res.send("Invalid email or password");
+        } else {
+            if (bcrypt.compareSync(password, elmnt[0].password)) {
+                let token = jwt.sign({ usuario: elmnt }, authConfig.secret, {
+                    expiresIn: authConfig.expires
                 });
-                //Mensaje de confirmación de login satisfactorio
                 let loginOkMessage = `welcome again ${elmnt[0].nickname}`
-                res.json({   // y envía por Postman...
-                    loginOkMessage, //el mensaje
-                    user: elmnt, //el usuario
-                    token: token //y el token generado
+                res.json({
+                    loginOkMessage,
+                    user: elmnt,
+                    token: token
                 })
             } else {
-                res.status(401).json({ msg: "Invalid email or password" }); //si no son iguales, login inválido
+                res.status(401).json({ msg: "Invalid email or password" });
             }
         };
     })
 };
 
-//MÉTODO GET PARA SACAR UN ELEMENTO DE LA BBDD BUSCÁNDOLO POR NICKNAME EN LA URL
+//GET USER
 UsersController.get = async (req, res) => {
-    //Búsqueda comparando un campo
 
     try {
         await User.find({
-            _id: req.params.id
+            _id: req.body.id
         })
             .then(elmnt => {
                 res.send(elmnt)
@@ -113,84 +92,66 @@ UsersController.get = async (req, res) => {
 
 }
 
-//MÉTODO PUT PARA MODIFICAR EL PERFIL DE UN USUARIO POR ID
-UsersController.update = async (req, res) => {
-    //Capturo el id que llega por params
-    let id = req.params.id;
-    try {
-        //Función updateOne de mongoose
-        User.updateOne(
-            //Primer argumento: objeto donde se compara la _id del documento con el id que llega por params para saber qué documento vamos a modificar
-            { _id: id }, {
-            //Segundo argumento: objeto que lleva como key '$set' para asignar los nuevos valores a cada campo
-            $set: {
-                //Y como valor un objeto con todos los campos de la tabla y su asignación por body
-                email: req.body.email,
-                rating: req.body.rating,
-                avatar: req.body.avatar,
-
-                //Metemos todos los campos susceptibles de ser modificados pero luego en el body solo enviaremos los que necesitemos modificar. Por ejemplo:
-                //{
-                //    "email":"JaviMOD",
-                //    "nickname":"jmonleone",
-                //    "rating":32,
-                //  "avatar": "URLimagenfotoperfil"
-                // }
-                //Y solo modificaremos nombre, apellido y edad de ese documento
-            }
-        }
-        )//If promise is done, response the edited user
-            .then(elmnt => {
-                User.find({
-                    _id: id
-                }).then(user => {
-                    res.send(user)
-                })
-            })
-    } catch (error) {
-        res.send("backend edit user error: ", error);
-    }
-}
-
-//MÉTODO DELETE PARA BORRAR UN USUARIO DE LA BBDD POR ID
+//DELETE USER
 UsersController.delete = async (req, res) => {
     let id = req.body.id;
 
     try {
-       await User.findByIdAndDelete(id)
-        .then(elmnt=>{
-            res.send(elmnt)
-        })
+        await User.findByIdAndDelete(id)
+            .then(elmnt => {
+                res.send(elmnt)
+            })
     } catch (error) {
         console.log("Error deleting user", error);
         res.send("Error deleting user", error);
     }
 };
 
+//UPDATE USER
+UsersController.updateEmail = async (req, res) => {
+    let id = req.body.id;
+    let email = req.body.email;
+    try {
+        await User.findByIdAndUpdate(id, {
+            $set: {
+                email: email,
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error updating user email", error);
+        res.send("Error updating user email", error);
+    }
+}
+
 //Get user rating
 UsersController.getRating = async (req, res) => {
 
     await User.find({
-        _id: req.params.id
+        _id: req.body.id
     })
         //Summatory of rating array
         .then(elmnt => {
-            let sum = elmnt[0].rating.reduce((a, b) => a + b);
-            //Get average
-            sum = sum / elmnt[0].rating.length;
-            //Round to 1 decimal
-            sum = sum.toFixed(1)
+            if (elmnt[0].rating.length !== 0) {
+                let sum = elmnt[0].rating.reduce((a, b) => a + b);
+                //Get average
+                sum = sum / elmnt[0].rating.length;
+                //Round to 1 decimal
+                sum = sum.toFixed(1)
 
-            //Return an object cause raw number is detected as error code
-            let result = {
-                rate: sum
+                //Return an object cause raw number is detected as error code
+                let result = {
+                    rate: sum
+                }
+
+                res.send(result);
+            } else {
+                res.send("0")
             }
 
-            res.send(result);
         })
-
-
-
 
 }
 
@@ -215,33 +176,18 @@ UsersController.follow = async (req, res) => {
                 followedNickname: followedNickname
             });
 
-            //Update followed users
-            User.updateOne(
-                { _id: userId }, {
-
+            User.findByIdAndUpdate(userId, {
                 $set: {
-                    //Replace db array with current updated array of followed
                     followed: followed
                 }
-            }
-            )//If promise is done, response the edited user
+            }).setOptions({ returnDocument: 'after' })
                 .then(elmnt => {
-                    User.find({
-                        _id: userId
-                    }).then(user => {
-                        res.send(user)
-                    })
+                    res.send(elmnt)
                 })
-
-
         })
 
-
-
-
-
     } catch (error) {
-        res.send("backend edit user error: ", error);
+        res.send("backend follow user error: ", error);
     }
 
 
@@ -266,29 +212,20 @@ UsersController.unfollow = async (req, res) => {
             followed = elmnt[0].followed;
 
             //Find desired user id to unfollow
-            for(let i=0 ; i<followed.length ; i++){
-                if(followed[i].followedId == unfollowedId){
+            for (let i = 0; i < followed.length; i++) {
+                if (followed[i].followedId == unfollowedId) {
                     //remove it of followed array
                     followed.splice(i, 1)
                 }
             }
 
-            //Update followed users
-            User.updateOne(
-                { _id: userId }, {
-
+            User.findByIdAndUpdate(userId, {
                 $set: {
-
                     followed: followed
                 }
-            }
-            )//If promise is done, response the edited user
+            }).setOptions({ returnDocument: 'after' })
                 .then(elmnt => {
-                    User.find({
-                        _id: userId
-                    }).then(user => {
-                        res.send(user)
-                    })
+                    res.send(elmnt)
                 })
 
 
@@ -299,13 +236,8 @@ UsersController.unfollow = async (req, res) => {
 
 
     } catch (error) {
-        res.send("backend edit user error: ", error);
+        res.send("backend unfollow user error: ", error);
     }
-
-
-
-
-
 }
 
 

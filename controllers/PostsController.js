@@ -74,12 +74,12 @@ PostsController.create = async (req, res) => {
 //GET POST
 PostsController.get = async (req, res) => {
 
-    let id = req.params.id;
+    let postId = req.body.postId;
 
 
     try {
         await Post.find({
-            _id: id
+            _id: postId
         })
             .then(elmnt => {
                 res.send(elmnt)
@@ -94,10 +94,10 @@ PostsController.get = async (req, res) => {
 //DELETE POST
 PostsController.delete = async (req, res) => {
 
-    let id = req.body.id;
+    let postId = req.body.postId;
 
     try {
-        await Post.findByIdAndDelete(id)
+        await Post.findByIdAndDelete(postId)
             .then(elmnt => {
                 res.send(elmnt)
             })
@@ -111,7 +111,7 @@ PostsController.delete = async (req, res) => {
 //UPDATE POST
 PostsController.update = async (req, res) => {
 
-    let id = req.body.id
+    let postId = req.body.postId
     let title = req.body.title;
     let img = req.body.img;
     let text = req.body.text;
@@ -122,12 +122,12 @@ PostsController.update = async (req, res) => {
     try {
         await Post.findByIdAndUpdate(id, {
             $set: {
-                title: req.body.title,
-                img: req.body.img,
-                text: req.body.text,
-                rating: req.body.rating,
-                keywords: req.body.keywords,
-                comments: req.body.comments,
+                title: title,
+                img: img,
+                text: text,
+                rating: rating,
+                keywords: keywords,
+                comments: comments,
             }
         }).setOptions({ returnDocument: 'after' })
             .then(elmnt => {
@@ -143,11 +143,11 @@ PostsController.update = async (req, res) => {
 //UPDATE POST TITLE
 PostsController.updateTitle = async (req, res) => {
 
-    let id = req.body.id
+    let postId = req.body.postId
     let title = req.body.title;
 
     try {
-        await Post.findByIdAndUpdate(id, {
+        await Post.findByIdAndUpdate(postId, {
             $set: {
                 title: title
             }
@@ -165,11 +165,11 @@ PostsController.updateTitle = async (req, res) => {
 //UPDATE POST IMG
 PostsController.updateImg = async (req, res) => {
 
-    let id = req.body.id
+    let postId = req.body.postId
     let img = req.body.img;
 
     try {
-        await Post.findByIdAndUpdate(id, {
+        await Post.findByIdAndUpdate(postId, {
             $set: {
                 img: img
             }
@@ -187,11 +187,11 @@ PostsController.updateImg = async (req, res) => {
 //UPDATE POST TEXT
 PostsController.updateText = async (req, res) => {
 
-    let id = req.body.id
+    let postId = req.body.postId
     let text = req.body.text;
 
     try {
-        await Post.findByIdAndUpdate(id, {
+        await Post.findByIdAndUpdate(postId, {
             $set: {
                 text: text
             }
@@ -209,17 +209,17 @@ PostsController.updateText = async (req, res) => {
 //RATE POST
 PostsController.addRating = async (req, res) => {
 
-    let id = req.body.id;
-    let userId = req.body.userId;
-    let userNickname = req.body.userNickname;
+    let postId = req.body.postId;
+    let raterId = req.body.raterId;
+    let raterNickname = req.body.raterNickname;
     let rate = req.body.rate;
 
     try {
-        await Post.findByIdAndUpdate(id, {
+        await Post.findByIdAndUpdate(postId, {
             $push: {
                 rating: {
-                    userId: userId,
-                    userNickname: userNickname,
+                    raterId: raterId,
+                    raterNickname: raterNickname,
                     rate: rate
                 }
             }
@@ -236,11 +236,11 @@ PostsController.addRating = async (req, res) => {
 
 //GET RATE POST
 PostsController.getRating = async (req, res) => {
-    let id = req.params.id;
+    let postId = req.body.postId;
 
     try {
         await Post.find({
-            _id: id
+            _id: postId
         })
             //Summatory of rate value of the rating array
             .then(elmnt => {
@@ -261,7 +261,7 @@ PostsController.getRating = async (req, res) => {
             })
 
     } catch (error) {
-        res.send("backend get rate error: ", error)
+        res.send("backend get post rating error: ", error)
     }
 
 };
@@ -270,11 +270,11 @@ PostsController.getRating = async (req, res) => {
 //UPDATE POST KEYWORDS
 PostsController.updateKeywords = async (req, res) => {
 
-    let id = req.body.id
+    let postId = req.body.postId
     let keywords = req.body.keywords;
 
     try {
-        await Post.findByIdAndUpdate(id, {
+        await Post.findByIdAndUpdate(postId, {
             $set: {
                 keywords: keywords
             }

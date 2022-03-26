@@ -19,24 +19,22 @@ router.post('/register', UsersController.register);
 router.post('/login', UsersController.login);
 
 //Get user
-//http://localhost:5500/users/profile/userId
-router.get('/profile/:id', UsersController.get);
-
-//Update user
-//http://localhost:5500/users/profile/update/userId
-router.put('/profile/update/:id', auth, UsersController.update);
+//http://localhost:5500/users/get
+router.get('/get', UsersController.get);
 
 //Delete user
 //http://localhost:5500/users/delete
 router.delete('/profile/delete', UsersController.delete);
 // router.delete('/profile/delete', auth, UsersController.delete);
 
-
+//Update user email
+//http://localhost:5500/users/updateEmail
+router.put('/updateEmail', UsersController.updateEmail);
 
 
 //Get user rating: returns rounded rating number
 //http://localhost:5500/users/rating/userId
-router.get('/profile/rating/:id', UsersController.getRating);
+router.get('/getRating', UsersController.getRating);
 
 //Follow another user
 //http://localhost:5500/users/actions/follow

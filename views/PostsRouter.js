@@ -19,8 +19,8 @@ router.post('/refreshToken', PostsController.refreshToken);
 router.post('/create', PostsController.create);
 
 //GET POST
-// http://localhost:5500/posts/get/postId
-router.get('/get/:id', PostsController.get);
+// http://localhost:5500/posts/get
+router.get('/get', PostsController.get);
 
 //DELETE POST: delete post
 // http://localhost:5500/posts/delete
@@ -53,8 +53,8 @@ router.put('/actions/addRating', PostsController.addRating);
 
 
 //GET RATE
-// http://localhost:5500/posts/actions/getRate/postId
-router.get('/actions/getRating/:id', PostsController.getRating);
+// http://localhost:5500/posts/actions/getRate
+router.get('/actions/getRating', PostsController.getRating);
 
 
 //UPDATE POST KEYWORDS
