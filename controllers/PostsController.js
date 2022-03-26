@@ -1,5 +1,7 @@
 //Importo el modelo Usuario para poder escribir en la tabla Usuario de la BBDD
 const Post = require('../models/post.js');
+
+const User = require('../models/user.js');
 //Importo la clase bcrypt para poder encriptar
 const bcrypt = require('bcrypt');
 //Importo el fichero ../config/auth.js para poder darle los parámetros al encriptado
@@ -749,6 +751,76 @@ PostsController.getAllCommentAnswers = async (req, res) => {
         res.send("backend get all comment answers error: ", error);
     }
 };
+
+
+//GET POSTS BY USER
+PostsController.getPostsByUser = async (req, res) => {
+    let ownerId = req.body.ownerId;
+
+    try {
+        Post.find({
+            ownerId: ownerId
+        }).then(elmnt => {
+            console.log(elmnt)
+           res.send(elmnt)
+        })
+
+    } catch (error) {
+        res.send("backend get posts by user error: ", error);
+    }
+};
+
+
+//FIND POSTS BY KEYWORDS
+PostsController.find = async (req, res) => {
+    let term = req.body.term
+    let results = {};
+
+    //If search term is not a number...
+
+        await Post.find({
+            //Search in Posts string fields using regex
+            $or: [
+                { ownerNickname: {$regex: new RegExp(term), $options:"i"}},
+                { title: {$regex: new RegExp(term), $options:"i"}},
+                { text: {$regex: new RegExp(term), $options:"i"}},
+                { keywords: {$regex: new RegExp(term), $options:"i"}},
+                { "comments.comment": {$regex: new RegExp(term), $options:"i"}},
+                { "comments.answers.answer": {$regex: new RegExp(term), $options:"i"}},
+            ]
+        }).then(stringElmnt => {
+            if(stringElmnt.length !== 0) {
+                results = {
+                    postsResults: stringElmnt
+                }
+            } else {
+                results = {
+                    postsResults: []
+                }
+            }
+        })
+
+
+        await User.find({
+
+            $or: [
+                { nickname: {$regex: new RegExp(term), $options:"i"}},
+               
+            ]
+        }).then(stringElmnt => {
+            if(stringElmnt.length !== 0) {
+                results.usersResults = stringElmnt;
+            } else {
+                results.usersResults = [];
+            }
+        })
+
+        res.send(results);
+    
+};
+
+
+
 
 
 

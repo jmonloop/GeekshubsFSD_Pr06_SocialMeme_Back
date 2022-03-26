@@ -10,9 +10,6 @@ const jwt = require('jsonwebtoken');
 const UsersController = {};
 
 
-
-
-
 //USER REGISTER
 UsersController.register = async (req, res) => {
 
@@ -239,7 +236,6 @@ UsersController.unfollow = async (req, res) => {
         res.send("backend unfollow user error: ", error);
     }
 }
-
 
 
 
