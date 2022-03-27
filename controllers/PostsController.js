@@ -827,44 +827,49 @@ PostsController.find = async (req, res) => {
 
     //If search term is not a number...
 
-    await Post.find({
-        //Search in Posts string fields using regex
-        $or: [
-            { ownerNickname: { $regex: new RegExp(term), $options: "i" } },
-            { title: { $regex: new RegExp(term), $options: "i" } },
-            { text: { $regex: new RegExp(term), $options: "i" } },
-            { keywords: { $regex: new RegExp(term), $options: "i" } },
-            { "comments.comment": { $regex: new RegExp(term), $options: "i" } },
-            { "comments.answers.answer": { $regex: new RegExp(term), $options: "i" } },
-        ]
-    }).then(stringElmnt => {
-        if (stringElmnt.length !== 0) {
-            results = {
-                postsResults: stringElmnt
+    if (term && term !== "") {
+        await Post.find({
+            //Search in Posts string fields using regex
+            $or: [
+                { ownerNickname: { $regex: new RegExp(term), $options: "i" } },
+                { title: { $regex: new RegExp(term), $options: "i" } },
+                { text: { $regex: new RegExp(term), $options: "i" } },
+                { keywords: { $regex: new RegExp(term), $options: "i" } },
+                { "comments.comment": { $regex: new RegExp(term), $options: "i" } },
+                { "comments.answers.answer": { $regex: new RegExp(term), $options: "i" } },
+            ]
+        }).then(stringElmnt => {
+            if (stringElmnt.length !== 0) {
+                results = {
+                    postsResults: stringElmnt
+                }
+            } else {
+                results = {
+                    postsResults: []
+                }
             }
-        } else {
-            results = {
-                postsResults: []
+        })
+
+
+        await User.find({
+
+            $or: [
+                { nickname: { $regex: new RegExp(term), $options: "i" } },
+
+            ]
+        }).then(stringElmnt => {
+            if (stringElmnt.length !== 0) {
+                results.usersResults = stringElmnt;
+            } else {
+                results.usersResults = [];
             }
-        }
-    })
+        })
 
+        res.send(results);
+    } else {
+        res.send("Term field can not be empty")
+    }
 
-    await User.find({
-
-        $or: [
-            { nickname: { $regex: new RegExp(term), $options: "i" } },
-
-        ]
-    }).then(stringElmnt => {
-        if (stringElmnt.length !== 0) {
-            results.usersResults = stringElmnt;
-        } else {
-            results.usersResults = [];
-        }
-    })
-
-    res.send(results);
 
 };
 
