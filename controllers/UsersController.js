@@ -76,7 +76,7 @@ UsersController.get = async (req, res) => {
 
     try {
         await User.find({
-            _id: req.body.id
+            _id: req.query.id
         })
             .then(elmnt => {
                 res.send(elmnt)
@@ -127,7 +127,7 @@ UsersController.updateEmail = async (req, res) => {
 UsersController.getRating = async (req, res) => {
 
     await User.find({
-        _id: req.body.id
+        _id: req.query.id
     })
         //Summatory of rating array
         .then(elmnt => {

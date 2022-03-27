@@ -78,7 +78,7 @@ PostsController.create = async (req, res) => {
 //GET POST
 PostsController.get = async (req, res) => {
 
-    let postId = req.body.postId;
+    let postId = req.query.postId;
 
 
     try {
@@ -281,7 +281,7 @@ PostsController.addRating = async (req, res) => {
 
 //GET RATE POST
 PostsController.getRating = async (req, res) => {
-    let postId = req.body.postId;
+    let postId = req.query.postId;
 
     try {
         await Post.find({
@@ -364,7 +364,7 @@ PostsController.addComment = async (req, res) => {
 
 //GET ALL POST COMMENTS
 PostsController.getAllComments = async (req, res) => {
-    let postId = req.body.postId;
+    let postId = req.query.postId;
 
     try {
         //Find owner user
@@ -381,8 +381,8 @@ PostsController.getAllComments = async (req, res) => {
 
 //GET COMMENT
 PostsController.getComment = async (req, res) => {
-    let postId = req.body.postId;
-    let commentId = req.body.commentId;
+    let postId = req.query.postId;
+    let commentId = req.query.commentId;
     let commentsArr = [];
 
     try {
@@ -558,8 +558,8 @@ PostsController.addCommentRating = async (req, res) => {
 
 //GET COMMENT RATING
 PostsController.getCommentRating = async (req, res) => {
-    let postId = req.body.postId;
-    let commentId = req.body.commentId;
+    let postId = req.query.postId;
+    let commentId = req.query.commentId;
     let commentsArr = [];
 
     try {
@@ -740,9 +740,9 @@ PostsController.updateCommentAnswer = async (req, res) => {
 
 //GET COMMENT ANSWER
 PostsController.getCommentAnswer = async (req, res) => {
-    let postId = req.body.postId;
-    let commentId = req.body.commentId;
-    let answerId = req.body.answerId;
+    let postId = req.query.postId;
+    let commentId = req.query.commentId;
+    let answerId = req.query.answerId;
     let commentsArr = [];
     let answersArr = [];
 
@@ -776,8 +776,8 @@ PostsController.getCommentAnswer = async (req, res) => {
 
 //GET ALL COMMENT ANSWERS
 PostsController.getAllCommentAnswers = async (req, res) => {
-    let postId = req.body.postId;
-    let commentId = req.body.commentId;
+    let postId = req.query.postId;
+    let commentId = req.query.commentId;
     let commentsArr = [];
 
     try {
@@ -804,7 +804,7 @@ PostsController.getAllCommentAnswers = async (req, res) => {
 
 //GET POSTS BY USER
 PostsController.getPostsByUser = async (req, res) => {
-    let ownerId = req.body.ownerId;
+    let ownerId = req.query.ownerId;
 
     try {
         Post.find({
@@ -822,7 +822,7 @@ PostsController.getPostsByUser = async (req, res) => {
 
 //FIND POSTS BY KEYWORDS
 PostsController.find = async (req, res) => {
-    let term = req.body.term
+    let term = req.query.term
     let results = {};
 
     //If search term is not a number...
