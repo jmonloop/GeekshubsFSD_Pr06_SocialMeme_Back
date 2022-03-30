@@ -45,14 +45,14 @@ UsersController.register = async (req, res) => {
 
 //USER LOGIN
 UsersController.login = async (req, res) => {
-    let email = req.body.email;
+    let nickname = req.body.nickname;
     let password = req.body.password;
 
     await User.find({
-        email: email
+        nickname: nickname
     }).then(elmnt => {
         if (!elmnt) {
-            res.send("Invalid email or password");
+            res.send("Invalid nickname or password");
         } else {
             if (bcrypt.compareSync(password, elmnt[0].password)) {
                 let token = jwt.sign({ usuario: elmnt }, authConfig.secret, {
@@ -65,7 +65,7 @@ UsersController.login = async (req, res) => {
                     token: token
                 })
             } else {
-                res.status(401).json({ msg: "Invalid email or password" });
+                res.status(401).json({ msg: "Invalid nickname or password" });
             }
         };
     })

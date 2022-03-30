@@ -14,6 +14,8 @@ const PostsController = require('../controllers/PostsController');
 // http://localhost:5500/posts/refreshToken
 router.post('/refreshToken', PostsController.refreshToken);
 
+router.post('/uploadImg', PostsController.uploadImg);
+
 //CREATE POST: creates post in db
 // http://localhost:5500/posts/create
 router.post('/create', PostsController.create);
