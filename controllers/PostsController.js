@@ -110,6 +110,23 @@ PostsController.get = async (req, res) => {
 
 };
 
+//GET 10 POST
+PostsController.get10 = async (req, res) => {
+
+    let page = req.query.page;
+
+
+    try {
+        await Post.find().sort({created: 'desc'}).limit(10).skip(page*10)
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        res.send("backend getPost error: ", error)
+    }
+
+};
+
 
 //DELETE POST
 PostsController.delete = async (req, res) => {

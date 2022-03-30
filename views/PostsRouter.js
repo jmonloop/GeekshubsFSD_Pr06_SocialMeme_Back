@@ -24,6 +24,10 @@ router.post('/create', PostsController.create);
 // http://localhost:5500/posts/get
 router.get('/get', PostsController.get);
 
+//GET 10 POSTS
+// http://localhost:5500/posts/get10
+router.get('/get10', PostsController.get10);
+
 //DELETE POST: delete post
 // http://localhost:5500/posts/delete
 router.delete('/delete', PostsController.delete);

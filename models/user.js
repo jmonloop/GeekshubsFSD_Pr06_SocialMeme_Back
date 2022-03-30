@@ -16,7 +16,7 @@ const userSchema = new Schema ({
         type: String,
         required: true,
     },
-    rol: {
+    role: {
         type: String,
         required: false
     },
