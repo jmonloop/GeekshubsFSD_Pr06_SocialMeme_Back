@@ -931,17 +931,20 @@ PostsController.findByUser = async (req, res) => {
 
         Post.find({
 
-            $or: [
-                { "comments.ownerId": userId },
-                { "comments.answers.ownerId": userId },
-            ]
+            "comments.ownerId": userId
+
         }).then(elmnt2 => {
-            if (elmnt2.length !== 0) {
-                results.commentsAndAnswers = elmnt2;
+            results.comments = elmnt2;
+
+            Post.find({
+
+                "comments.answers.ownerId": userId
+
+            }).then(elmnt3 => {
+                results.answers = elmnt3;
+
                 res.send(results);
-            } else {
-                res.send(results)
-            }
+            })
         })
 
     })
