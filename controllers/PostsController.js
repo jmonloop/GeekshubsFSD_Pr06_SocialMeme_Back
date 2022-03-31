@@ -254,7 +254,7 @@ PostsController.addRating = async (req, res) => {
 
 
     await Post.find({
-        raterId: raterId
+        'rating.raterId': raterId
     }).then(result => {
         if (result.length !== 0) {
             res.send("You have already rated this post")
