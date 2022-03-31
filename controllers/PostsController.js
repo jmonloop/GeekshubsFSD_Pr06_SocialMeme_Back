@@ -254,13 +254,18 @@ PostsController.addRating = async (req, res) => {
 
 
     await Post.find({
-        'rating.raterId': raterId
+        //Check if user has already rated the post
+        $and:[
+            {_id: postId},
+            {'rating.raterId': raterId}
+        ]
+        
     }).then(result => {
         if (result.length !== 0) {
             res.send("You have already rated this post")
         } else {
 
-
+            //Add new rating
             Post.findByIdAndUpdate(postId, {
                 $push: {
                     rating: {
@@ -290,58 +295,21 @@ PostsController.addRating = async (req, res) => {
                                 //Round to 1 decimal
                                 sum = sum.toFixed(1)
 
+                                //Update rating average
                                 Post.findByIdAndUpdate(postId, {
                                     ratingAverage: sum
-
+                                    //response updated post
                                 }).setOptions({ returnDocument: 'after' })
                                     .then(elmnt => {
                                         res.send(elmnt)
                                     })
 
+                            } else {
+                                res.send(elmnt)
                             }
                         })
                 })
 
-
-            // try {
-            //     Post.find({
-            //         _id: postId
-            //     })
-            //         //Summatory of rate value of the rating array
-            //         .then(elmnt => {
-            //             if (elmnt[0].rating.length > 1) {
-            //                 sum = elmnt[0].rating.reduce((a, b) => {
-            //                     return {
-            //                         rate: a.rate + b.rate
-            //                     }
-            //                 });
-
-            //                 //Get average
-            //                 sum = sum.rate / elmnt[0].rating.length;
-
-            //                 //Round to 1 decimal
-            //                 sum = sum.toFixed(1)
-
-            //             }
-            //         })
-            // } catch (error) {
-            //     console.log("Error sum rating post", error);
-            //     res.send("Error sum rating post", error);
-            // }
-
-
-            // try {
-            //     Post.findByIdAndUpdate(postId, {
-            //         ratingAverage: sum
-
-            //     }).setOptions({ returnDocument: 'after' })
-            //         .then(elmnt => {
-            //             res.send(elmnt)
-            //         })
-            // } catch (error) {
-            //     console.log("Error updating post rating average", error);
-            //     res.send("Error updating post rating average", error);
-            // }
         }
     })
 
