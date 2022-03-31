@@ -51,7 +51,8 @@ UsersController.login = async (req, res) => {
     await User.find({
         nickname: nickname
     }).then(elmnt => {
-        if (!elmnt) {
+        console.log("hola",elmnt);
+        if (elmnt.length === 0) {
             res.send("Invalid nickname or password");
         } else {
             if (bcrypt.compareSync(password, elmnt[0].password)) {
