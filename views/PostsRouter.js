@@ -134,5 +134,9 @@ router.get('/actions/getPostsByUser', PostsController.getPostsByUser);
 // http://localhost:5500/posts/actions/find
 router.get('/actions/find', PostsController.find);
 
+//FIND POSTS bY USER ID
+// http://localhost:5500/posts/actions/find
+router.get('/actions/findByUser', PostsController.findByUser);
+
 //Exporto router para que pueda ser importado desde otros ficheros una vez ha ejecutado la lógica de éste(siempre igual)
 module.exports = router;

@@ -255,11 +255,11 @@ PostsController.addRating = async (req, res) => {
 
     await Post.find({
         //Check if user has already rated the post
-        $and:[
-            {_id: postId},
-            {'rating.raterId': raterId}
+        $and: [
+            { _id: postId },
+            { 'rating.raterId': raterId }
         ]
-        
+
     }).then(result => {
         if (result.length !== 0) {
             res.send("You have already rated this post")
@@ -914,6 +914,37 @@ PostsController.find = async (req, res) => {
     }
 
 
+};
+
+//FIND POSTS AND USER COMMETNS BY USER ID
+PostsController.findByUser = async (req, res) => {
+    let userId = req.query.userId;
+    let results = {};
+
+
+    await Post.find({
+        ownerId: userId
+    }).then(elmnt => {
+
+        results.posts = elmnt;
+
+
+        Post.find({
+
+            $or: [
+                { "comments.ownerId": userId },
+                { "comments.answers.ownerId": userId },
+            ]
+        }).then(elmnt2 => {
+            if (elmnt2.length !== 0) {
+                results.commentsAndAnswers = elmnt2;
+                res.send(results);
+            } else {
+                res.send(results)
+            }
+        })
+
+    })
 };
 
 
