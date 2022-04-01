@@ -386,6 +386,7 @@ PostsController.addComment = async (req, res) => {
             $push: {
                 comments: {
                     commentId: commentId,
+                    postId: postId,
                     ownerId: ownerId,
                     ownerNickname: ownerNickname,
                     comment: comment,
@@ -655,6 +656,8 @@ PostsController.addCommentAnswer = async (req, res) => {
                     //Add new answer
                     commentsArr[i].answers.push({
                         answerId: answerId,
+                        commentId: commentId,
+                        postId: postId,
                         ownerId: ownerId,
                         ownerNickname: ownerNickname,
                         answer: answer,
