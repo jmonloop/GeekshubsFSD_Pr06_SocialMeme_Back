@@ -916,7 +916,7 @@ PostsController.find = async (req, res) => {
 
 };
 
-//FIND POSTS AND USER COMMETNS BY USER ID
+//FIND POSTS AND USER COMMENTS BY USER ID
 PostsController.findByUser = async (req, res) => {
     let userId = req.query.userId;
     let results = {};
@@ -946,6 +946,51 @@ PostsController.findByUser = async (req, res) => {
                 res.send(results);
             })
         })
+
+    })
+};
+
+//FIND COMMENTS ARR BY USER ID
+PostsController.findCommentsByUser = async (req, res) => {
+    let userId = req.query.userId;
+    let commentsArr = [];
+
+    await Post.find({
+        "comments.ownerId": userId
+    }).then(elmnt => {
+
+        for(let i = 0; i < elmnt.length; i++){
+            for(let j = 0; j < elmnt[i].comments.length; j++){
+                if(elmnt[i].comments[j].ownerId == userId){
+                    commentsArr.push(elmnt[i].comments[j])
+                }
+            }
+        }
+        res.send(commentsArr);
+
+    })
+};
+
+//FIND ANSWERS ARR BY USER ID
+PostsController.findAnswersByUser = async (req, res) => {
+    let userId = req.query.userId;
+    let answersArr = [];
+
+    await Post.find({
+        "comments.answers.ownerId": userId
+    }).then(elmnt => {
+
+        for(let i = 0; i < elmnt.length; i++){
+            for(let j = 0; j < elmnt[i].comments.length; j++){
+                for(let k = 0; k < elmnt[i].comments[j].answers.length; k++){
+                    if(elmnt[i].comments[j].answers[k].ownerId == userId){
+                        answersArr.push(elmnt[i].comments[j].answers[k])
+                    }
+                }
+            }
+        }
+        
+        res.send(answersArr);
 
     })
 };
