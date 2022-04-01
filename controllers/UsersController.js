@@ -105,7 +105,7 @@ UsersController.delete = async (req, res) => {
     }
 };
 
-//UPDATE USER
+//UPDATE USER EMAIL
 UsersController.updateEmail = async (req, res) => {
     let id = req.body.id;
     let email = req.body.email;
@@ -121,6 +121,25 @@ UsersController.updateEmail = async (req, res) => {
     } catch (error) {
         console.log("Error updating user email", error);
         res.send("Error updating user email", error);
+    }
+}
+
+//UPDATE USER AVATAR
+UsersController.updateAvatar = async (req, res) => {
+    let id = req.body.id;
+    let avatar = req.body.avatar;
+    try {
+        await User.findByIdAndUpdate(id, {
+            $set: {
+                avatar: avatar,
+            }
+        }).setOptions({ returnDocument: 'after' })
+            .then(elmnt => {
+                res.send(elmnt)
+            })
+    } catch (error) {
+        console.log("Error updating user avatar", error);
+        res.send("Error updating user avatar", error);
     }
 }
 

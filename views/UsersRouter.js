@@ -31,6 +31,10 @@ router.delete('/profile/delete', UsersController.delete);
 //http://localhost:5500/users/updateEmail
 router.put('/updateEmail', UsersController.updateEmail);
 
+//Update user avatar
+//http://localhost:5500/users/updateEmail
+router.put('/updateAvatar', UsersController.updateAvatar);
+
 
 //Get user rating: returns rounded rating number
 //http://localhost:5500/users/rating/userId
