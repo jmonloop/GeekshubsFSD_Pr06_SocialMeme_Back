@@ -555,10 +555,11 @@ PostsController.addCommentRating = async (req, res) => {
         ]
 
     }).then(result => {
-        if (result.length !== 0) {
+        if (result.length === 0) {
             res.send("You have already rated this comment")
         } else {
             //Save actual comments array in the variable
+            console.log(result);
             commentsArr = result[0].comments;
 
             //Find desired comment to rate
