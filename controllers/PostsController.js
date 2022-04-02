@@ -15,7 +15,9 @@ let currentToken;
 const moment = require('moment')
 const mongoose = require("mongoose");
 
-
+const minMaxRoundedRandom = (min, max) => {
+    return Math.round(Math.random() * (max - min) + min);
+}
 
 //REFRESH IMGUR TOKEN
 //Refresh IMGUR token for accessing to any imgur endpoint
@@ -371,7 +373,7 @@ PostsController.updateKeywords = async (req, res) => {
 
 //ADD POST COMMENT
 PostsController.addComment = async (req, res) => {
-    let commentId = mongoose.Types.ObjectId();
+    let commentId = `${req.body.ownerNickname}${minMaxRoundedRandom(1, 100000)}`;
     let postId = req.body.postId;
     let ownerId = req.body.ownerId;
     let ownerNickname = req.body.ownerNickname;
@@ -544,8 +546,6 @@ PostsController.addCommentRating = async (req, res) => {
 
 
 
-
-
     //Find owner user
     await Post.find({
         $and: [
@@ -555,50 +555,61 @@ PostsController.addCommentRating = async (req, res) => {
         ]
 
     }).then(result => {
-        if (result.length === 0) {
+        if (result.length !== 0) {
             res.send("You have already rated this comment")
         } else {
-            //Save actual comments array in the variable
-            console.log(result);
-            commentsArr = result[0].comments;
 
-            //Find desired comment to rate
-            for (let i = 0; i < commentsArr.length; i++) {
-                if (commentsArr[i].commentId == commentId) {
-                    //update it with body data
-                    commentsArr[i].rating.push({
-                        raterId: raterId,
-                        raterNickname: raterNickname,
-                        rate: rate
-                    })
-                    commentsArr[i].updated = updated;
+            Post.find({
+                $and: [
+                    { _id: postId },
+                    { "comments.commentId": commentId }
+                ]
+            }).then(elmnt => {
 
-                    if (commentsArr.length !== 0) {
-                        sum = commentsArr[i].rating.reduce((a, b) => {
-                            return {
-                                rate: a.rate + b.rate
-                            }
-                        });
 
-                        //Get average
-                        sum = sum.rate / result[0].rating.length;
+                //Save actual comments array in the variable
+                commentsArr = elmnt[0].comments;
 
-                        //Round to 1 decimal
-                        sum = sum.toFixed(1)
+                //Find desired comment to rate
+                for (let i = 0; i < commentsArr.length; i++) {
+                    if (commentsArr[i].commentId == commentId) {
+                        //update it with body data
+                        commentsArr[i].rating.push({
+                            raterId: raterId,
+                            raterNickname: raterNickname,
+                            rate: rate
+                        })
+                        commentsArr[i].updated = updated;
 
-                        commentsArr[i].ratingAverage = sum;
+                        if (commentsArr.length !== 0) {
+                            sum = commentsArr[i].rating.reduce((a, b) => {
+                                return {
+                                    rate: a.rate + b.rate
+                                }
+                            });
+
+                            //Get average
+                            sum = sum.rate / elmnt[0].rating.length;
+
+                            //Round to 1 decimal
+                            sum = sum.toFixed(1)
+
+                            commentsArr[i].ratingAverage = sum;
+                        }
                     }
                 }
-            }
 
-            Post.findByIdAndUpdate(postId, {
-                $set: {
-                    comments: commentsArr
-                }
-            }).setOptions({ returnDocument: 'after' })
-                .then(elmnt => {
-                    res.send(elmnt)
-                })
+
+                Post.findByIdAndUpdate(postId, {
+                    $set: {
+                        comments: commentsArr
+                    }
+                }).setOptions({ returnDocument: 'after' })
+                    .then(elmnt => {
+                        res.send(elmnt)
+                    })
+
+            })
 
         }
 
