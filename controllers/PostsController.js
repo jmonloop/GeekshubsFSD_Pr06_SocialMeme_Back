@@ -559,7 +559,7 @@ PostsController.addCommentRating = async (req, res) => {
             res.send("You have already rated this comment")
         } else {
             //Save actual comments array in the variable
-            commentsArr = elmnt[0].comments;
+            commentsArr = result[0].comments;
 
             //Find desired comment to rate
             for (let i = 0; i < commentsArr.length; i++) {
@@ -580,7 +580,7 @@ PostsController.addCommentRating = async (req, res) => {
                         });
 
                         //Get average
-                        sum = sum.rate / elmnt[0].rating.length;
+                        sum = sum.rate / result[0].rating.length;
 
                         //Round to 1 decimal
                         sum = sum.toFixed(1)
