@@ -143,6 +143,8 @@ UsersController.updateAvatar = async (req, res) => {
     }
 }
 
+
+
 //Get user rating
 UsersController.getRating = async (req, res) => {
 

@@ -542,11 +542,22 @@ PostsController.addCommentRating = async (req, res) => {
     let ratingAverage;
     let sum;
 
-    try {
-        //Find owner user
-        Post.find({
-            _id: postId
-        }).then(elmnt => {
+
+
+
+
+    //Find owner user
+    await Post.find({
+        $and: [
+            { _id: postId },
+            { "comments.commentId": commentId },
+            { "comments.rating.raterId": raterId }
+        ]
+
+    }).then(result => {
+        if (result.length !== 0) {
+            res.send("You have already rated this comment")
+        } else {
             //Save actual comments array in the variable
             commentsArr = elmnt[0].comments;
 
@@ -577,11 +588,7 @@ PostsController.addCommentRating = async (req, res) => {
                         commentsArr[i].ratingAverage = sum;
                     }
                 }
-
-
             }
-
-
 
             Post.findByIdAndUpdate(postId, {
                 $set: {
@@ -592,11 +599,10 @@ PostsController.addCommentRating = async (req, res) => {
                     res.send(elmnt)
                 })
 
-        })
+        }
 
-    } catch (error) {
-        res.send("backend update comment error: ", error);
-    }
+    })
+
 };
 
 
@@ -962,9 +968,9 @@ PostsController.findCommentsByUser = async (req, res) => {
         "comments.ownerId": userId
     }).then(elmnt => {
 
-        for(let i = 0; i < elmnt.length; i++){
-            for(let j = 0; j < elmnt[i].comments.length; j++){
-                if(elmnt[i].comments[j].ownerId == userId){
+        for (let i = 0; i < elmnt.length; i++) {
+            for (let j = 0; j < elmnt[i].comments.length; j++) {
+                if (elmnt[i].comments[j].ownerId == userId) {
                     commentsArr.push(elmnt[i].comments[j])
                 }
             }
@@ -983,16 +989,16 @@ PostsController.findAnswersByUser = async (req, res) => {
         "comments.answers.ownerId": userId
     }).then(elmnt => {
 
-        for(let i = 0; i < elmnt.length; i++){
-            for(let j = 0; j < elmnt[i].comments.length; j++){
-                for(let k = 0; k < elmnt[i].comments[j].answers.length; k++){
-                    if(elmnt[i].comments[j].answers[k].ownerId == userId){
+        for (let i = 0; i < elmnt.length; i++) {
+            for (let j = 0; j < elmnt[i].comments.length; j++) {
+                for (let k = 0; k < elmnt[i].comments[j].answers.length; k++) {
+                    if (elmnt[i].comments[j].answers[k].ownerId == userId) {
                         answersArr.push(elmnt[i].comments[j].answers[k])
                     }
                 }
             }
         }
-        
+
         res.send(answersArr);
 
     })
