@@ -589,7 +589,7 @@ PostsController.addCommentRating = async (req, res) => {
                             });
 
                             //Get average
-                            sum = sum.rate / elmnt[0].rating.length;
+                            sum = sum.rate / commentsArr[i].rating.length;
 
                             //Round to 1 decimal
                             sum = sum.toFixed(1)
