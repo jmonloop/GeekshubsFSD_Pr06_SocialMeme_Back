@@ -133,7 +133,7 @@ PostsController.get10 = async (req, res) => {
 //DELETE POST
 PostsController.delete = async (req, res) => {
 
-    let postId = req.body.postId;
+    let postId = req.query.postId;
 
     try {
         await Post.findByIdAndDelete(postId)
