@@ -159,7 +159,7 @@ PostsController.update = async (req, res) => {
     let comments = req.body.comments;
 
     try {
-        await Post.findByIdAndUpdate(id, {
+        await Post.findByIdAndUpdate(postId, {
             $set: {
                 title: title,
                 img: img,
