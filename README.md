@@ -402,4 +402,4 @@ Searches introduced string chain into users, posts, comments and answers fields.
 
 ## CREDITS
 
-_This project has been made by <a href="https://github.com/suku60">Juan Manuel Stella</a> and <a href="https://github.com/jmonloop">Javier Monleón</a>
+This project has been made by <a href="https://github.com/suku60">Juan Manuel Stella</a>, <a href="https://github.com/jmonloop">Javier Monleón</a>, and Iván Company.

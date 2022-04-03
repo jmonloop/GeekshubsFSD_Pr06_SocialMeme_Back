@@ -119,7 +119,7 @@ PostsController.get10 = async (req, res) => {
 
 
     try {
-        await Post.find().sort({ created: 'asc' }).limit(page * 10)
+        await Post.find().sort({ created: 'desc' }).limit(page * 10)
             .then(elmnt => {
                 res.send(elmnt)
             })
