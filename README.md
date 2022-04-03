@@ -51,7 +51,7 @@ More info <a href="https://documenter.getpostman.com/view/3967924/RW1dExDv">here
 
 * [POSTS](#posts)
 
-* USERS
+* [USERS](#users)
 
 [Register](#register)
 
