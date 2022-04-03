@@ -1,5 +1,46 @@
+## TOMEME backend
+This is our sixth Geekshubs Academy FSD Bootcamp backend project. It supplies data to, <a href='https://github.com/suku60/frontend-project-6'>Project 6 Frontend</a>
+
+- [Objectives](#objectives)
+
+- [Architecture](#architecture)
+
+- [Installation](#installation)
+
+- [Endpoints](#endpoints)
+
+<!-- - [Coming Soon](#coming-soon) -->
+
+- [Credits](#Credits)
+
 ## Purpose
-This project feeds data to FSD Geekshubs Academy Bootcamp, <a href='https://github.com/suku60/frontend-project-6'>Project 6</a>
+Main objective is to serve an API to the frontend client with all kind of endpoints that our social network may need.
+
+
+## Architecture
+ Functional API Restful has been used for the API design. We preferred to being more descriptive at each endpoint URL even though that meant not to follow the philosophy of squeeze each one with all CRUD options.
+
+ * DATABASE DESIGN
+
+ As Database we have used MongoDB and Mongoose as the ORM. It is deployed in Atlas.
+
+ As non-relational database, we have make our own algorithms to virtually relation some fields and let doing specific searchings and gets.
+
+## Installation
+The project is fully deployed in Heroku server so you only need to download Postman application for testing it.
+
+## Postman
+1 Download and install [Postman](https://www.postman.com/downloads/)
+
+2 Download the file ../assets//deploy/ToMeme.postman_collection.json from this repository
+
+3 Open Postman and click on Import
+![ScreenShot](https://raw.githubusercontent.com/jmonloop/GeekshubsFSD_Pr04_VideoStoreBackend/master/assets/postman_import.jpg)
+
+4 Upload ToMeme.postman_collection.json file and Import it
+
+5 Expand the new ToMeme/Remote tab and all the endpoints will be shown
+
 
 ## Endpoints
 
@@ -347,3 +388,13 @@ Searches introduced string chain into users, posts, comments and answers fields.
     https://socialmeme.herokuapp.com/posts/actions/find?tern=<searchingterm> (get)
 
 
+
+
+
+
+<!-- ## COMING SOON -->
+
+
+## CREDITS
+
+_This project has been made by <a href="https://github.com/suku60">Juan Manuel Stella</a>, <a href="https://github.com/jmonloop">Javier Monleón</a> and <a href="https://github.com/IvanCompDev">Iván Company</a>,._
