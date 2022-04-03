@@ -29,6 +29,11 @@ Main objective is to serve an API to the frontend client with all kind of endpoi
 ## Installation
 The project is fully deployed in Heroku server so you only need to download Postman application for testing it.
 
+* Imgur token refresh
+
+As Imgur upload image endpoint token needs to be refreshed every 30 days, if you try to request CreatePost and receive an Imgur error, you must request "Refresh imgur Token" endpoint, copy the refresh_token that responses that endpoint and paste it into Postman enviroment.
+More info <a href="https://documenter.getpostman.com/view/3967924/RW1dExDv">here</a>
+
 ## Postman
 1 Download and install [Postman](https://www.postman.com/downloads/)
 
@@ -397,4 +402,4 @@ Searches introduced string chain into users, posts, comments and answers fields.
 
 ## CREDITS
 
-_This project has been made by <a href="https://github.com/suku60">Juan Manuel Stella</a>, <a href="https://github.com/jmonloop">Javier Monleón</a> and <a href="https://github.com/IvanCompDev">Iván Company</a>,._
+_This project has been made by <a href="https://github.com/suku60">Juan Manuel Stella</a> and <a href="https://github.com/jmonloop">Javier Monleón</a>
