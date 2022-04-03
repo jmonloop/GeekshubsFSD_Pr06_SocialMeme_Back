@@ -1,3 +1,6 @@
+## Purpose
+This project feeds data to FSD Geekshubs Academy Bootcamp, <a href='https://github.com/suku60/frontend-project-6'>Project 6</a>
+
 ## Endpoints
 
 * [POSTS](#posts)
@@ -49,11 +52,9 @@
 
 ### GET USER
 
-     https://socialmeme.herokuapp.com/users/get (get)
+     https://socialmeme.herokuapp.com/users/get?id=<userID> (get)
 
-    {
-        "id":"623a19e12be74bc5a33f6df2"
-    }
+
 
 ### UPDATE USER EMAIL
 
@@ -74,11 +75,8 @@
 
 ### GET USER AVERAGE RATING
 
-    https://socialmeme.herokuapp.com/users/getRating (get)
-
-    {
-        "id":"623a1a762be74bc5a33f6df5"
-    }   
+    https://socialmeme.herokuapp.com/users/getRating?id=<userID> (get)
+ 
 
 ### FOLLOW ANOTHER USER
 
@@ -155,47 +153,45 @@
 
 ### CREATE
 
-https://socialmeme.herokuapp.com/posts/create
+https://socialmeme.herokuapp.com/posts/create (post)
 
     {
         "ownerId": "623a1a762be74bc5a33f6df5",
         "ownerNickname": "javidafacker",
-        "title": "TITULO DEL POST",
+        "title": "Santa's secret",
         "img": "https://i.imgur.com/vEP1qu8.jpg",
-        "text": "Soy el contenido del post",
-        "keywords":["animales", "nieve", "navidad"]
+        "text": "All Through the House, Love Death and Robots episode",
+        "keywords":["santa", "secret", "christmas"]
     }
 
 ### GET
-https://socialmeme.herokuapp.com/posts/get
 
-    {
-        "postId": "623db28dd29d9acbb2a94b47"
-    }
+    https://socialmeme.herokuapp.com/posts/get?postId=<postID> (get)
+
 
 ### DELETE
-https://socialmeme.herokuapp.com/posts/delete
 
-    {
-        "postId": "623db28dd29d9acbb2a94b47"
-    }
+    https://socialmeme.herokuapp.com/posts/delete?postId=<postID> (delete)
+
 
 ### UPDATE
 
 Generic for updating any field except Ids or owner.
-https://socialmeme.herokuapp.com/posts/update
+
+    https://socialmeme.herokuapp.com/posts/update (put)
 
     {
         "postId": "623db28dd29d9acbb2a94b47",
         "title": "MOD",
         "img": "https://i.imgur.com/vEP1qu8.jpg",
-        "text": "TITULO MOD",
-        "keywords":["animales", "nieve", "navidad"]
+        "text": "MOD TITLE",
+        "keywords":["animals", "nature", "mountain"]
     }
 
 
 ### UPDATE TITLE
-https://socialmeme.herokuapp.com/posts/actions/updateTitle
+
+    https://socialmeme.herokuapp.com/posts/actions/updateTitle (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
@@ -204,15 +200,17 @@ https://socialmeme.herokuapp.com/posts/actions/updateTitle
 
 
 ### UPDATE IMAGE
-https://socialmeme.herokuapp.com/posts/actions/updateImg
+
+    https://socialmeme.herokuapp.com/posts/actions/updateImg (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
-        "img": "httpxzcccccjpg"
+        "img": "https://i.imgur.com/vEP1qu8.jpg"
     }
 
 ### UPDATE TEXT
-https://socialmeme.herokuapp.com/posts/actions/updateText
+
+    https://socialmeme.herokuapp.com/posts/actions/updateText (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
@@ -220,25 +218,25 @@ https://socialmeme.herokuapp.com/posts/actions/updateText
     }
 
 ### ADD RATING
-https://socialmeme.herokuapp.com/posts/actions/addRating
+
+    https://socialmeme.herokuapp.com/posts/actions/addRating (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
         "raterId": "623adacbe296c2eaecfd3867",
-        "raterNickname": "roberto",
+        "raterNickname": "robert",
         "rate": 5
     }
 
 
 ### GET AVERAGE RATING
-https://socialmeme.herokuapp.com/posts/actions/getRating
 
-    {
-        "postId": "623db28dd29d9acbb2a94b47"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/getRating?postId=<postID> (get)
+
 
 ### UPDATE KEYWORDS
-https://socialmeme.herokuapp.com/posts/actions/updateKeywords
+
+    https://socialmeme.herokuapp.com/posts/actions/updateKeywords (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
@@ -247,43 +245,36 @@ https://socialmeme.herokuapp.com/posts/actions/updateKeywords
 
 
 ### ADD COMMENT
-https://socialmeme.herokuapp.com/posts/actions/addComment
+
+    https://socialmeme.herokuapp.com/posts/actions/addComment (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
         "ownerId": "623a1a762be74bc5a33f6df5",
-        "ownerNickname": "juanmadafacker",
+        "ownerNickname": "juanma",
         "comment": "This is the first post comment"
     }
 
 ### GET ALL COMMENTS
-https://socialmeme.herokuapp.com/posts/actions/getAllComments
 
-    {
-        "postId": "623e189585f0553698ee33e2"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/getAllComments?postId=<postID> (get)
 
 
 ### GET SPECIFIC COMMENT
-https://socialmeme.herokuapp.com/posts/actions/getComment
 
-    {
-        "postId": "623e189585f0553698ee33e2",
-        "commentId": "623e301e4faf01f3fe17a0c1"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/getComment?postId=<postID>&commentId=<commentID> (get)
+
 
 
 ### DELETE COMMENT
-https://socialmeme.herokuapp.com/posts/actions/deleteComment
 
-    {
-        "postId": "623e189585f0553698ee33e2",
-        "commentId": "623e284faadceea976ee54bf"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/deleteComment?postId=<postID>&commentID=<commentID> (put)
+
 
 
 ### UPDATE COMMENT
-https://socialmeme.herokuapp.com/posts/actions/updateComment
+
+    https://socialmeme.herokuapp.com/posts/actions/updateComment (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
@@ -292,82 +283,67 @@ https://socialmeme.herokuapp.com/posts/actions/updateComment
     }
 
 ### ADD COMMENT RATING
-https://socialmeme.herokuapp.com/posts/actions/addCommentRating
+
+    https://socialmeme.herokuapp.com/posts/actions/addCommentRating (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
         "commentId": "623e301e4faf01f3fe17a0c1",
         "raterId": "623adacbe296c2eaecfd3867",
-        "raterNickname": "robertofacker",
+        "raterNickname": "robert",
         "rate": 5
     }
 
 ### GET COMMENT AVERAGE RATING
-https://socialmeme.herokuapp.com/posts/actions/getCommentRating
 
-    {
-        "postId": "623e189585f0553698ee33e2",
-        "commentId": "623e301e4faf01f3fe17a0c1"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/getCommentRating?postId=<postID>&commentId=<commentID> (get)
+
 
 ### ADD ANSWER TO COMMENT
-https://socialmeme.herokuapp.com/posts/actions/addCommentAnswer
+
+    https://socialmeme.herokuapp.com/posts/actions/addCommentAnswer (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
         "commentId": "623e301e4faf01f3fe17a0c1",
         "ownerId": "623adae1e296c2eaecfd386d",
         "ownerNickname": "Raquel",
-        "answer": "Ahora responda Raquel"
+        "answer": "Now Raquel answers"
     }
 
 ### DELETE ANSWER
-https://socialmeme.herokuapp.com/posts/actions/deleteCommentAnswer
 
-    {
-        "postId": "623e189585f0553698ee33e2",
-        "commentId": "623e301e4faf01f3fe17a0c1",
-        "answerId": "623e4912fe186462bd33eae8"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/deleteCommentAnswer?postId=<postID>&commentId=<commentID>&answerId=<answerID> (put)
+
 
 ### UPDATE ANSWER
-https://socialmeme.herokuapp.com/posts/actions/updateCommentAnswer
+
+    https://socialmeme.herokuapp.com/posts/actions/updateCommentAnswer (put)
 
     {
         "postId": "623e189585f0553698ee33e2",
         "commentId": "623e301e4faf01f3fe17a0c1",
         "answerId": "623e493afe186462bd33eaeb",
-        "answer": "soy la modificación de la respuesta!!!!!"
+        "answer": "I am an updated answer"
     }
 
 ### GET SPECIFIC ANSWER FROM A COMMENT
-https://socialmeme.herokuapp.com/posts/actions/getCommentAnswer
 
-    {
-        "postId": "623e189585f0553698ee33e2",
-        "commentId": "623e301e4faf01f3fe17a0c1",
-        "answerId": "623e493afe186462bd33eaeb"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/getCommentAnswer?postId=<postID>&commentId=<commentID>&answerId=<answerID> (get)
+
 
 ### GET ALL ANSWERS FROM A COMMENT
-https://socialmeme.herokuapp.com/posts/actions/getAllCommentAnswers
 
-    {
-        "postId": "623e189585f0553698ee33e2",
-        "commentId": "623e301e4faf01f3fe17a0c1"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/getAllCommentAnswers?postId=<postID>&commentId=<commentID> (get)
+
 
 ### GET ALL POSTS FROM A USER
-https://socialmeme.herokuapp.com/posts/actions/getPostsByUser
 
-    {
-        "ownerId": "623a1a762be74bc5a33f6df5"
-    }
+    https://socialmeme.herokuapp.com/posts/actions/getPostsByUser?ownerId=<ownerID> (get)
 
 ### FIND USERS AND POSTS BY TERM
-Searches introduced string chain in all fields of users, posts, comments and answers.
-https://socialmeme.herokuapp.com/posts/actions/find
-    {
-    "term": "de"
-    }
+Searches introduced string chain into users, posts, comments and answers fields.
+
+    https://socialmeme.herokuapp.com/posts/actions/find?tern=<searchingterm> (get)
+
 

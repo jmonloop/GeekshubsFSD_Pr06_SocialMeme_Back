@@ -703,9 +703,9 @@ PostsController.addCommentAnswer = async (req, res) => {
 
 //DELETE COMMENT ANSWER
 PostsController.deleteCommentAnswer = async (req, res) => {
-    let postId = req.body.postId;
-    let commentId = req.body.commentId;
-    let answerId = req.body.answerId;
+    let postId = req.query.postId;
+    let commentId = req.query.commentId;
+    let answerId = req.query.answerId;
     let commentsArr = [];
     let answersArr = [];
 
