@@ -23,10 +23,10 @@ const minMaxRoundedRandom = (min, max) => {
 //Refresh IMGUR token for accessing to any imgur endpoint
 PostsController.refreshToken = async (req, res) => {
     let body = {
-        refresh_token: `ea853491f044c26ed467ab9e2c421e009bfe82b7`,
-        client_id: `94d8c15128665c4`,
-        client_secret: `17eecea1afda036ea8da37845c60868ff932749d`,
-        grant_type: `refresh_token`
+        refresh_token: process.env.refresh_token,
+        client_id: process.env.client_id,
+        client_secret: process.env.client_secret,
+        grant_type: process.env.grant_type
     }
 
 

@@ -24,16 +24,16 @@ router.get('/get', UsersController.get);
 
 //Delete user
 //http://localhost:5500/users/delete
-router.delete('/profile/delete', UsersController.delete);
+router.delete('/profile/delete', auth, UsersController.delete);
 // router.delete('/profile/delete', auth, UsersController.delete);
 
 //Update user email
 //http://localhost:5500/users/updateEmail
-router.put('/updateEmail', UsersController.updateEmail);
+router.put('/updateEmail', auth, UsersController.updateEmail);
 
 //Update user avatar
 //http://localhost:5500/users/updateEmail
-router.put('/updateAvatar', UsersController.updateAvatar);
+router.put('/updateAvatar', auth, UsersController.updateAvatar);
 
 
 //Get user rating: returns rounded rating number
@@ -42,12 +42,12 @@ router.get('/getRating', UsersController.getRating);
 
 //Follow another user
 //http://localhost:5500/users/actions/follow
-router.put('/actions/follow', UsersController.follow);
+router.put('/actions/follow', auth, UsersController.follow);
 // router.put('/actions/follow', auth, UsersController.follow);
 
 //Unfollow another user
 //http://localhost:5500/users/actions/unfollow
-router.put('/actions/unfollow', UsersController.unfollow);
+router.put('/actions/unfollow', auth, UsersController.unfollow);
 // router.put('/actions/unfollow', auth, UsersController.unfollow);
 
 
