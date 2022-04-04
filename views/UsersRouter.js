@@ -33,8 +33,8 @@ router.put('/updateEmail', auth, UsersController.updateEmail);
 
 //Update user avatar
 //http://localhost:5500/users/updateEmail
-router.put('/updateAvatar', UsersController.updateAvatar);
-// router.put('/updateAvatar', auth, UsersController.updateAvatar);
+// router.put('/updateAvatar', UsersController.updateAvatar);
+router.put('/updateAvatar', auth, UsersController.updateAvatar);
 
 
 //Get user rating: returns rounded rating number
@@ -43,13 +43,13 @@ router.get('/getRating', UsersController.getRating);
 
 //Follow another user
 //http://localhost:5500/users/actions/follow
-router.put('/actions/follow', UsersController.follow);
-// router.put('/actions/follow', auth, UsersController.follow);
+// router.put('/actions/follow', UsersController.follow);
+router.put('/actions/follow', auth, UsersController.follow);
 
 //Unfollow another user
 //http://localhost:5500/users/actions/unfollow
-router.put('/actions/unfollow', UsersController.unfollow);
-// router.put('/actions/unfollow', auth, UsersController.unfollow);
+// router.put('/actions/unfollow', UsersController.unfollow);
+router.put('/actions/unfollow', auth, UsersController.unfollow);
 
 
 
