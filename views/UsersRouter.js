@@ -42,7 +42,7 @@ router.get('/getRating', UsersController.getRating);
 
 //Follow another user
 //http://localhost:5500/users/actions/follow
-router.put('/actions/follow', auth, UsersController.follow);
+router.put('/actions/follow', UsersController.follow);
 // router.put('/actions/follow', auth, UsersController.follow);
 
 //Unfollow another user
