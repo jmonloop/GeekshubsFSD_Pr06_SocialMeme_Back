@@ -135,7 +135,8 @@ UsersController.updateAvatar = async (req, res) => {
             }
         }).setOptions({ returnDocument: 'after' })
             .then(elmnt => {
-                res.send(elmnt[0])
+                console.log(elmnt);
+                res.send(elmnt)
             })
     } catch (error) {
         console.log("Error updating user avatar", error);
