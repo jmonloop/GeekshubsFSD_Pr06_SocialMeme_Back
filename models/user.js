@@ -16,7 +16,7 @@ const userSchema = new Schema ({
         type: String,
         required: true,
     },
-    rol: {
+    role: {
         type: String,
         required: false
     },
@@ -26,6 +26,10 @@ const userSchema = new Schema ({
     },
     avatar: {
         type: String,
+        required: false
+    },
+    followed: {
+        type: Array,
         required: false
     }
 });
@@ -45,3 +49,6 @@ userSchema.set('toJSON', toJSONConfig);
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
+
+
+

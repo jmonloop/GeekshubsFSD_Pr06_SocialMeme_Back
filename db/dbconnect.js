@@ -4,7 +4,7 @@ const dbconnect = () => {
     const mongoose = require("mongoose");
 
     //URI
-    const conn_str = "mongodb+srv://SocialMeme:socialmemefsd@cluster0.ofpax.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+    const conn_str = process.env.URI;
 
     mongoose.connect(
         conn_str,

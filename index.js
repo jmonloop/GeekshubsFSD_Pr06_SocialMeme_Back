@@ -6,8 +6,8 @@ const app=express();
 const cors = require('cors');
 //Importo fichero ./router
 const router = require('./router');
-//Constante para el puerto local de la API
-const PORT = 5500;
+//Constante para el puerto remoto y local de la API
+const PORT = process.env.PORT || 5500;
 
 //Configuro cors
 let corsOptions = {

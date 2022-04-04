@@ -10,22 +10,45 @@ const isAdmin = require("../middlewares/isAdmin");
 //Importo el fichero UsuariosController y lo guardo en la variable UsuariosController. Luego habrá que crearlo.
 const UsersController = require('../controllers/UsersController');
 
-
-// http://localhost:5000/usuarios/register (usando un POST).
-// Recibe por body un json con los datos de registro de usuario y los guarda en la BBDD
+//Register
+// http://localhost:5500/users/register
 router.post('/register', UsersController.register);
 
+//Login
+//http://localhost:5500/users/login
+router.post('/login', UsersController.login);
+
+//Get user
+//http://localhost:5500/users/get
+router.get('/get', UsersController.get);
+
+//Delete user
+//http://localhost:5500/users/delete
+router.delete('/profile/delete', auth, UsersController.delete);
+// router.delete('/profile/delete', auth, UsersController.delete);
+
+//Update user email
+//http://localhost:5500/users/updateEmail
+router.put('/updateEmail', auth, UsersController.updateEmail);
+
+//Update user avatar
+//http://localhost:5500/users/updateEmail
+router.put('/updateAvatar', auth, UsersController.updateAvatar);
 
 
+//Get user rating: returns rounded rating number
+//http://localhost:5500/users/rating/userId
+router.get('/getRating', UsersController.getRating);
 
+//Follow another user
+//http://localhost:5500/users/actions/follow
+router.put('/actions/follow', auth, UsersController.follow);
+// router.put('/actions/follow', auth, UsersController.follow);
 
-
-
-
-
-
-
-
+//Unfollow another user
+//http://localhost:5500/users/actions/unfollow
+router.put('/actions/unfollow', auth, UsersController.unfollow);
+// router.put('/actions/unfollow', auth, UsersController.unfollow);
 
 
 

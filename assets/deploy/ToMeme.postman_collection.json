@@ -1,0 +1,2706 @@
+{
+	"info": {
+		"_postman_id": "c1f63a28-ea13-4a61-8b8d-ae52ebdc6a17",
+		"name": "ToMeme",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"email\":\"alvaro@gmail.com\",\r\n        \"password\":\"1234\",\r\n         \"nickname\": \"alvaro\",\r\n         \"rating\": [4,5,2,2,4,5,6,7],\r\n         \"avatar\": \"\",\r\n         \"followed\": []\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"rating\": [4,5,2,2,4,5,6,7,8,9, 10]\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/profile/update/623a1b072be74bc5a33f6dfb",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"profile",
+										"update",
+										"623a1b072be74bc5a33f6dfb"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"nickname\":\"javidafacker\",\r\n        \"password\":\"1234\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"623a19e12be74bc5a33f6df2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/get",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"get"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"id\": \"623ae01662104984869490a6\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/profile/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"profile",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Email",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"623a19e12be74bc5a33f6df2\",\r\n    \"email\":\"nuevo@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/updateEmail",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"updateEmail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Avatar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"623a19e12be74bc5a33f6df2\",\r\n    \"email\":\"nuevo@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/updateEmail",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"updateEmail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetRating",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"623a1a762be74bc5a33f6df5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/getRating",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"getRating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Follow",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"followedId\":\"623ae01662104984869490a6\",\r\n    \"followedNickname\":\"aida\",\r\n    \"userId\":\"623ae0e26612cdd3fb8a9838\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/actions/follow",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"actions",
+										"follow"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unfollow",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/users/actions/unfollow?unfollowedId=623adae1e296c2eaecfd386d&userId=623ab60060200da0ff08567c",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"users",
+										"actions",
+										"unfollow"
+									],
+									"query": [
+										{
+											"key": "unfollowedId",
+											"value": "623adae1e296c2eaecfd386d"
+										},
+										{
+											"key": "userId",
+											"value": "623ab60060200da0ff08567c"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Posts",
+					"item": [
+						{
+							"name": "Refresh imgur Token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5500/posts/refreshToken",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"refreshToken"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ownerId\": \"623a1ac82be74bc5a33f6df8\",\r\n    \"ownerNickname\": \"juanmadafacker\",\r\n    \"title\": \"POST DE JUANMA OSTIAAAAAA\",\r\n    \"img\": \"https://i.imgur.com/vEP1qu8.jpg\",\r\n    \"text\": \"Soy el contenido del post\",\r\n    \"keywords\":[\"personas\", \"comedia\", \"ropa\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"postId\": \"623e189585f0553698ee33e2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/get",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"get"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get latest 10 posts",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/get10?page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"get10"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623db28dd29d9acbb2a94b47\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623db28dd29d9acbb2a94b47\",\r\n    \"title\": \"MOD\",\r\n    \"img\": \"https://i.imgur.com/vEP1qu8.jpg\",\r\n    \"text\": \"TITULO MOD\",\r\n    \"keywords\":[\"animales\", \"nieve\", \"navidad\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update title",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"title\": \"new title\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/updateTitle",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"updateTitle"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update image",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n     \"img\": \"httpxzcccccjpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/updateImg",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"updateImg"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update text",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n      \"text\": \"asdkjsdakdjaksdjñsajñksjgvñlekdñlasjfñkjdskñvjdskvjdskfjsdkvmkrsfjgksdjfksdf\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/updateText",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"updateText"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Rating",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"6244184c73aee878d1eef599\",\r\n    \"raterId\": \"62407b3653220bdf6798ed01\",\r\n    \"raterNickname\": \"davidochando\",\r\n    \"rate\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/addRating",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"addRating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Rating",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"postId\": \"623f423fbfa797e221a29eeb\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/getRating",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"getRating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update keywords",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n     \"keywords\": [\"mode\", \"mod2\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/updateKeywords",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"updateKeywords"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n     \"ownerId\": \"62463be891f779ca8aed3754\",\r\n     \"ownerNickname\": \"javividor\",\r\n     \"comment\": \"y desde Postman sí que va\",\r\n     \"postId\": \"62401227d1e7ea3b66a7beb2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/addComment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"addComment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Comments",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/getAllComments",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"getAllComments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comment",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/getComment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"getComment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n     \"commentId\": \"623e284faadceea976ee54bf\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/deleteComment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"deleteComment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"comment\": \"comentario actualizado\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/updateComment",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"updateComment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Comment Rating",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623f423fbfa797e221a29eeb\",\r\n    \"commentId\": \"623f4870cfb374fcf17f91b5\",\r\n    \"raterId\": \"623adacbe296c2eaecfd3867\",\r\n    \"raterNickname\": \"robertofacker\",\r\n    \"rate\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/addCommentRating",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"addCommentRating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comment Rating",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623f423fbfa797e221a29eeb\",\r\n    \"commentId\": \"623f4ab5cf858cd58cabb8d4\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/getCommentRating",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"getCommentRating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Answer to Comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623f423fbfa797e221a29eeb\",\r\n    \"commentId\": \"623f4ab5cf858cd58cabb8d4\",\r\n    \"ownerId\": \"62463be891f779ca8aed3754\",\r\n    \"ownerNickname\": \"Javividor\",\r\n    \"answer\": \"Copilot can see you\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/addCommentAnswer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"addCommentAnswer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Answer from Comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"answerId\": \"623e4912fe186462bd33eae8\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/deleteCommentAnswer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"deleteCommentAnswer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Answer from Comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"answerId\": \"623e493afe186462bd33eaeb\",\r\n    \"answer\": \"soy la modificación de la respuesta!!!!!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/updateCommentAnswer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"updateCommentAnswer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Answer from Comment",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"answerId\": \"623e493afe186462bd33eaeb\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/getCommentAnswer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"getCommentAnswer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Answers from Comment",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/getAllCommentAnswers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"getAllCommentAnswers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Posts By User",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/getPostsByUser?ownerId=623a1a762be74bc5a33f6df5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"getPostsByUser"
+									],
+									"query": [
+										{
+											"key": "ownerId",
+											"value": "623a1a762be74bc5a33f6df5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find by term",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"term\": \"!!!!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/find",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"find"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload image",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/uploadImg",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"uploadImg"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find by user",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/findByUser?userId=62463be891f779ca8aed3754",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"findByUser"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "62463be891f779ca8aed3754"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Comments by user",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/findCommentsByUser?userId=62463be891f779ca8aed3754",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"findCommentsByUser"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "62463be891f779ca8aed3754"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Answers by user",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:5500/posts/actions/findAnswersByUser?userId=62463be891f779ca8aed3754",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5500",
+									"path": [
+										"posts",
+										"actions",
+										"findAnswersByUser"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "62463be891f779ca8aed3754"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Remote",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"email\":\"alvaro@gmail.com\",\r\n        \"password\":\"1234\",\r\n         \"nickname\": \"alvaro\",\r\n         \"rating\": [4,5,2,2,4,5,6,7],\r\n         \"avatar\": \"\",\r\n         \"followed\": []\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/register",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"email\":\"juanma3@gmail.com\",\r\n        \"password\":\"1234\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/login",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/get?id=asdasdasdasdasdas",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"get"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "asdasdasdasdasdas"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Email",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"623a19e12be74bc5a33f6df2\",\r\n    \"email\":\"nuevo@gmail.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/updateEmail",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"updateEmail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Avatar",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":\"623a19e12be74bc5a33f6df2\",\r\n    \"avatar\":\"fakeImgURL.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/updateAvatar",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"updateAvatar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"rating\": [4,5,2,2,4,5,6,7,8,9, 10]\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/profile/update/623a1b072be74bc5a33f6dfb",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"profile",
+										"update",
+										"623a1b072be74bc5a33f6dfb"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"id\": \"623ae01662104984869490a6\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/profile/delete",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"profile",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetRating",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/getRating?id=asdasdasdasdasdasdassad",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"getRating"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "asdasdasdasdasdasdassad"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Follow",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"followedId\":\"6248380df03e02566b1c90ba\",\r\n    \"followedNickname\":\"pep\",\r\n    \"userId\":\"6248380df03e02566b1c90ba\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/actions/follow",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"actions",
+										"follow"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unfollow",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjpbeyJfaWQiOiI2MjNhMjkwZThhN2JhNzc3MWE1NjI3ZmQiLCJlbWFpbCI6Imp1YW5tYTNAZ21haWwuY29tIiwibmlja25hbWUiOiJqdWFubWFkYWZhY2tlcjMiLCJyYXRpbmciOls0LDUsMiwyLDQsNSw2LDddLCJhdmF0YXIiOiJramFza2RqYXNrZGprYXNkamthc2pka3NhamtzYWQiLCJfX3YiOjB9XSwiaWF0IjoxNjQ3OTc5MzQ2LCJleHAiOjE2NDgwNjU3NDZ9.xMrRRpDLzriL6sWHlf2AYN0_O6D5TtoIllJh6ktFY1Y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"unfollowedId\":\"6248380df03e02566b1c90ba\",\r\n    \"userId\":\"6248380df03e02566b1c90ba\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/users/actions/unfollow",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"users",
+										"actions",
+										"unfollow"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Posts",
+					"item": [
+						{
+							"name": "Refresh imgur Token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/refreshToken",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"refreshToken"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"ownerId\": \"623a1a762be74bc5a33f6df5\",\r\n    \"ownerNickname\": \"javidafacker\",\r\n    \"title\": \"TITULO DEL POST\",\r\n    \"img\": \"https://i.imgur.com/vEP1qu8.jpg\",\r\n    \"text\": \"Soy el contenido del post\",\r\n    \"keywords\":[\"animales\", \"nieve\", \"navidad\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/create",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/get?postId=624417e373aee878d1eef597",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"get"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "624417e373aee878d1eef597"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get latest 10",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/get?postId=l234kl234kjknjk23kj432k23k",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"get"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "l234kl234kjknjk23kj432k23k"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/delete?postId=asdasdsadasdasdasgasda",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "asdasdsadasdasdasgasda"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623db28dd29d9acbb2a94b47\",\r\n    \"title\": \"MOD\",\r\n    \"img\": \"https://i.imgur.com/vEP1qu8.jpg\",\r\n    \"text\": \"TITULO MOD\",\r\n    \"keywords\":[\"animales\", \"nieve\", \"navidad\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/update",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update title",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"title\": \"asds\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/updateTitle",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"updateTitle"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update image",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n     \"img\": \"httpxzcccccjpg\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/updateImg",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"updateImg"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update text",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n      \"text\": \"asdkjsdakdjaksdjñsajñksjgvñlekdñlasjfñkjdskñvjdskvjdskfjsdkvmkrsfjgksdjfksdf\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/updateText",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"updateText"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Rating",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"raterId\": \"623adacbe296c2eaecfd3867\",\r\n    \"raterNickname\": \"roberto\",\r\n    \"rate\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/addRating",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"addRating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Rating",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/getRating?postId=sadaf23rffrdwf2f4frewt34",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"getRating"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "sadaf23rffrdwf2f4frewt34"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update keywords",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"keywords\": [\"mode\", \"mod2\"]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/updateKeywords",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"updateKeywords"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n     \"ownerId\": \"623a1a762be74bc5a33f6df5\",\r\n     \"ownerNickname\": \"javidafacker\",\r\n     \"comment\": \"Este es el segundo comentario en un post\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/addComment",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"addComment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Comments",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/getAllComments?postId=sadasdcascascasdasdsads",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"getAllComments"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "sadasdcascascasdasdsads"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comment",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/getComment?postId=624841a4ca90418de3775c45&commentId=pep49791",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"getComment"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "624841a4ca90418de3775c45"
+										},
+										{
+											"key": "commentId",
+											"value": "pep49791"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n     \"commentId\": \"623e284faadceea976ee54bf\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/deleteComment",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"deleteComment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"comment\": \"comentario actualizado\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/updateComment",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"updateComment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Comment Rating",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"raterId\": \"623adacbe296c2eaecfd3867\",\r\n    \"raterNickname\": \"robertofacker\",\r\n    \"rate\": 5\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/addCommentRating",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"addCommentRating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comment Rating",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/getCommentRating?postId=623e189585f0553698ee33e2&commentId=623e301e4faf01f3fe17a0c1",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"getCommentRating"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "623e189585f0553698ee33e2"
+										},
+										{
+											"key": "commentId",
+											"value": "623e301e4faf01f3fe17a0c1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Answer to Comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"ownerId\": \"623adae1e296c2eaecfd386d\",\r\n    \"ownerNickname\": \"Raquel\",\r\n    \"answer\": \"Ahora responda Raquel\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/addCommentAnswer",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"addCommentAnswer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Answer from Comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"answerId\": \"623e4912fe186462bd33eae8\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/deleteCommentAnswer?postId=<postID>&commentId=<commentID>&answerId=<answerID>",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"deleteCommentAnswer"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "<postID>"
+										},
+										{
+											"key": "commentId",
+											"value": "<commentID>"
+										},
+										{
+											"key": "answerId",
+											"value": "<answerID>"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Answer from Comment",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"answerId\": \"623e493afe186462bd33eaeb\",\r\n    \"answer\": \"soy la modificación de la respuesta!!!!!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/updateCommentAnswer",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"updateCommentAnswer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Answer from Comment",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\",\r\n    \"answerId\": \"623e493afe186462bd33eaeb\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/getCommentAnswer?postId=623e189585f0553698ee33e2&commentId=623e301e4faf01f3fe17a0c1&answerId=623e493afe186462bd33eaeb",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"getCommentAnswer"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "623e189585f0553698ee33e2"
+										},
+										{
+											"key": "commentId",
+											"value": "623e301e4faf01f3fe17a0c1"
+										},
+										{
+											"key": "answerId",
+											"value": "623e493afe186462bd33eaeb"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Answers from Comment",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"postId\": \"623e189585f0553698ee33e2\",\r\n    \"commentId\": \"623e301e4faf01f3fe17a0c1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/getAllCommentAnswers?postId=623e189585f0553698ee33e2&commentId=623e301e4faf01f3fe17a0c1",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"getAllCommentAnswers"
+									],
+									"query": [
+										{
+											"key": "postId",
+											"value": "623e189585f0553698ee33e2"
+										},
+										{
+											"key": "commentId",
+											"value": "623e301e4faf01f3fe17a0c1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Posts By User",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"ownerId\": \"623a1a762be74bc5a33f6df5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/getPostsByUser?ownerId=623a1a762be74bc5a33f6df5",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"getPostsByUser"
+									],
+									"query": [
+										{
+											"key": "ownerId",
+											"value": "623a1a762be74bc5a33f6df5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find by term",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://socialmeme.herokuapp.com/posts/actions/find?term=terminodebusqueda",
+									"protocol": "https",
+									"host": [
+										"socialmeme",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"posts",
+										"actions",
+										"find"
+									],
+									"query": [
+										{
+											"key": "term",
+											"value": "terminodebusqueda"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
