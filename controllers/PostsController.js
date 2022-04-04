@@ -104,7 +104,7 @@ PostsController.get = async (req, res) => {
             _id: postId
         })
             .then(elmnt => {
-                res.send(elmnt)
+                res.send(elmnt[0])
             })
     } catch (error) {
         res.send("backend getPost error: ", error)
